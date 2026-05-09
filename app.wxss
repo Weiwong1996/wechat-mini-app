@@ -1,0 +1,52 @@
+page {
+  --background: #f8fafc;
+  --foreground: #020617;
+  --card: #ffffff;
+  --card-foreground: #020617;
+  --primary: #18181b;
+  --primary-foreground: #ffffff;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --destructive: #dc2626;
+  --ring: rgba(24, 24, 27, 0.16);
+
+  min-height: 100%;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.page-shell {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 48rpx 32rpx;
+}
+
+.card {
+  border: 1rpx solid var(--border);
+  border-radius: 32rpx;
+  background: var(--card);
+  color: var(--card-foreground);
+  box-shadow: 0 24rpx 80rpx rgba(15, 23, 42, 0.08);
+}
+
+.muted-text {
+  color: var(--muted-foreground);
+}
+
+.primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96rpx;
+  border-radius: 20rpx;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.primary-button[disabled] {
+  opacity: 0.64;
+}

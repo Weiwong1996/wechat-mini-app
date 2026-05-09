@@ -1,0 +1,42 @@
+<view class="page-shell login-page">
+  <view class="login-hero">
+    <view class="eyebrow">Supabase Auth</view>
+    <view class="title">使用微信登录</view>
+    <view class="description muted-text">
+      通过微信官方登录能力获取一次性 code，并由 Supabase Edge Function 完成安全认证。
+    </view>
+  </view>
+
+  <view class="card login-card">
+    <view class="card-header">
+      <view class="card-title">欢迎回来</view>
+      <view class="card-description muted-text">
+        使用微信身份登录以继续访问小程序。
+      </view>
+    </view>
+
+    <view class="card-content">
+      <view class="notice">
+        <view class="notice-title">登录说明</view>
+        <view class="notice-text muted-text">
+          小程序端只会提交微信临时登录凭证 code，不会接收或保存微信 session_key。
+        </view>
+      </view>
+
+      <view wx:if="{{errorMessage}}" class="error-message">
+        {{errorMessage}}
+      </view>
+    </view>
+
+    <view class="card-footer">
+      <button
+        class="primary-button login-button"
+        loading="{{isLoggingIn}}"
+        disabled="{{isLoggingIn}}"
+        bindtap="onTapLogin"
+      >
+        {{isLoggingIn ? '登录中...' : '微信一键登录'}}
+      </button>
+    </view>
+  </view>
+</view>

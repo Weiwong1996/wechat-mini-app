@@ -1,0 +1,68 @@
+.home-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-card {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: 28rpx;
+  padding: 40rpx;
+}
+
+.status-badge {
+  align-self: flex-start;
+  border-radius: 999rpx;
+  background: var(--muted);
+  color: var(--foreground);
+  font-size: 24rpx;
+  font-weight: 600;
+  padding: 10rpx 18rpx;
+}
+
+.home-title {
+  color: var(--foreground);
+  font-size: 44rpx;
+  font-weight: 700;
+}
+
+.home-description {
+  font-size: 28rpx;
+  line-height: 1.7;
+}
+
+.session-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  border: 1rpx solid var(--border);
+  border-radius: 24rpx;
+  padding: 24rpx;
+}
+
+.session-label {
+  font-size: 24rpx;
+}
+
+.session-value {
+  color: var(--foreground);
+  font-size: 26rpx;
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88rpx;
+  border: 1rpx solid var(--border);
+  border-radius: 20rpx;
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 30rpx;
+  font-weight: 600;
+}

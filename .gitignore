@@ -1,0 +1,15 @@
+# WeChat DevTools（本机配置，勿提交）
+project.private.config.json
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# 日志与临时文件
+*.log
+npm-debug.log*
+node_modules/

@@ -1,0 +1,20 @@
+<view class="page-shell home-page">
+  <view class="card home-card">
+    <view class="status-badge">已登录</view>
+    <view class="home-title">认证状态正常</view>
+    <view class="home-description muted-text">
+      本页从本地存储读取 Supabase 登录态，用于确认微信登录流程已经完成。
+    </view>
+
+    <view class="session-panel">
+      <view class="session-label muted-text">当前用户</view>
+      <view class="session-value">
+        {{user && user.id ? user.id : 'Edge Function 未返回用户 ID'}}
+      </view>
+    </view>
+
+    <button class="logout-button" bindtap="onTapLogout">
+      退出登录
+    </button>
+  </view>
+</view>

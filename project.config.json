@@ -1,0 +1,18 @@
+{
+  "description": "Native WeChat Mini Program with Supabase login",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "latest",
+  "appid": "wx0a7d47753a4d4cb4",
+  "projectname": "supabase-wechat-login",
+  "condition": {}
+}
