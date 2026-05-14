@@ -1,0 +1,24 @@
+<view
+  wx:if="{{!hidden}}"
+  class="tab-bar-root {{isDark ? 'theme-dark' : ''}}"
+  style="background-color: {{isDark ? '#2c2b2b' : '#f7f4ed'}};"
+>
+  <view
+    class="tab-bar-border"
+    style="background-color: {{isDark ? 'rgba(244, 240, 239, 0.12)' : '#eceae4'}};"
+  />
+  <view class="tab-bar-inner" style="padding-bottom: env(safe-area-inset-bottom);">
+    <view
+      wx:for="{{list}}"
+      wx:for-item="item"
+      wx:for-index="idx"
+      wx:key="pagePath"
+      class="tab-item {{selected === idx ? 'tab-item-on' : ''}}"
+      data-index="{{idx}}"
+      bindtap="onTapTab"
+    >
+      <text class="tab-icon">{{item.icon}}</text>
+      <text class="tab-label">{{item.text}}</text>
+    </view>
+  </view>
+</view>
