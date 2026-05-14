@@ -1,21 +1,127 @@
-<view class="page-shell record-page">
-  <view class="screen-intro">
-    <view class="screen-kicker muted-text">STEP 01</view>
-    <view class="screen-title">录入</view>
-    <view class="screen-desc muted-text">用自然语言写下今天的成长片段，便于后续检索与问答。</view>
-  </view>
+<view class="page-root record-page {{isDark ? 'theme-dark' : ''}}">
+  <scroll-view class="record-scroll page-shell has-tab" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="record-head">
+      <view class="ds-screen-title record-main-title">成长记录</view>
+      <view class="record-subtitle ds-caption">搜索里程碑与每日记录（演示数据）</view>
+    </view>
 
-  <view class="card record-sheet">
-    <view class="sheet-label muted-text">今日记录</view>
-    <textarea
-      class="record-textarea"
-      placeholder="例如：宝宝今天身高 72cm，体重 9.5kg，第一次翻身。"
-      maxlength="2000"
-      value="{{body}}"
-      bindinput="onInputBody"
-      show-confirm-bar="{{false}}"
-      placeholder-class="record-ph"
-    />
-    <button class="accent-fill-button submit-btn" bindtap="onTapSubmit">提交</button>
+    <view class="record-search card field-input">
+      <text class="record-search-glyph" aria-hidden="true">⌕</text>
+      <input
+        class="record-search-input"
+        placeholder="搜索里程碑或日常记录…"
+        value="{{search}}"
+        bindinput="onInputSearch"
+        placeholder-class="input-placeholder"
+      />
+    </view>
+
+    <scroll-view class="filter-scroll" scroll-x show-scrollbar="{{false}}" enable-flex>
+      <view class="filter-inner">
+        <view
+          class="filter-pill {{filter === 'all' ? 'filter-pill-on' : ''}}"
+          data-f="all"
+          bindtap="onFilter"
+        >全部</view>
+        <view
+          class="filter-pill {{filter === 'growth' ? 'filter-pill-on' : ''}}"
+          data-f="growth"
+          bindtap="onFilter"
+        >成长</view>
+        <view
+          class="filter-pill {{filter === 'feeding' ? 'filter-pill-on' : ''}}"
+          data-f="feeding"
+          bindtap="onFilter"
+        >喂养</view>
+        <view
+          class="filter-pill {{filter === 'sleep' ? 'filter-pill-on' : ''}}"
+          data-f="sleep"
+          bindtap="onFilter"
+        >睡眠</view>
+      </view>
+    </scroll-view>
+
+    <view class="record-section">
+      <view class="ds-label-caps record-section-label">今天</view>
+      <block wx:if="{{todayFiltered.length}}">
+        <view
+          wx:for="{{todayFiltered}}"
+          wx:key="id"
+          class="log-card"
+        >
+          <view class="log-card-top">
+            <view class="log-card-left">
+              <view class="log-icon-box">
+                <text>{{item.icon}}</text>
+              </view>
+              <view>
+                <view class="log-card-title">{{item.title}}</view>
+                <view class="log-card-meta muted-text">{{item.timeLine}}</view>
+              </view>
+            </view>
+            <view class="log-badge">
+              <view class="log-dot log-dot-{{item.statusDot}}" />
+              <text>{{item.status === 'indexed' ? '已索引' : '索引中'}}</text>
+            </view>
+          </view>
+          <view wx:if="{{item.body}}" class="log-body ds-body">{{item.body}}</view>
+        </view>
+      </block>
+      <view wx:else class="empty-hint muted-text">无匹配记录</view>
+    </view>
+
+    <view class="record-section">
+      <view class="ds-label-caps record-section-label">昨天</view>
+      <block wx:if="{{yesterdayFiltered.length}}">
+        <view
+          wx:for="{{yesterdayFiltered}}"
+          wx:key="id"
+          class="log-card"
+        >
+          <view class="log-card-top">
+            <view class="log-card-left">
+              <view class="log-icon-box">
+                <text>{{item.icon}}</text>
+              </view>
+              <view>
+                <view class="log-card-title">{{item.title}}</view>
+                <view class="log-card-meta muted-text">{{item.timeLine}}</view>
+              </view>
+            </view>
+            <view class="log-badge">
+              <view class="log-dot log-dot-{{item.statusDot}}" />
+              <text>已索引</text>
+            </view>
+          </view>
+          <view wx:if="{{item.extraGrid}}" class="log-grid">
+            <view wx:for="{{item.extraGrid}}" wx:key="k" wx:for-item="cell" class="log-grid-cell">
+              <view class="log-grid-label muted-text">{{cell.k}}</view>
+              <view class="log-grid-val ds-section-heading">{{cell.v}}</view>
+            </view>
+          </view>
+          <view wx:if="{{item.body}}" class="log-body ds-body">{{item.body}}</view>
+          <view wx:if="{{item.hasPhoto}}" class="log-photo-placeholder muted-text">附图占位 · 静态演示</view>
+        </view>
+      </block>
+      <view wx:else class="empty-hint muted-text">无匹配记录</view>
+    </view>
+  </scroll-view>
+
+  <view class="record-fab" bindtap="onTapFab" hover-class="record-fab-hover" aria-role="button">+</view>
+
+  <view wx:if="{{showComposer}}" class="composer-mask" bindtap="onCloseComposer">
+    <view class="composer-panel card" catchtap="noop">
+      <view class="composer-title ds-section-heading">新记录</view>
+      <textarea
+        class="composer-textarea field-input"
+        placeholder="写下今天的成长片段…"
+        value="{{body}}"
+        bindinput="onInputBody"
+        maxlength="2000"
+        show-confirm-bar="{{false}}"
+        placeholder-class="input-placeholder"
+      />
+      <button class="accent-fill-button composer-submit" bindtap="onTapSubmit">提交</button>
+    </view>
   </view>
 </view>

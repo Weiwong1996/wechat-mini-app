@@ -1,67 +1,100 @@
-<view class="dashboard-root">
-  <view class="dash-hero card">
-    <view class="dash-hero-top">
-      <view class="dash-hero-copy">
-        <view class="dash-kicker muted-text">工作台 · Parenting</view>
-        <view class="dash-headline">你好，欢迎回来</view>
-        <view class="dash-sub muted-text">记录日常、提问回顾、查看成长趋势</view>
+<view class="page-root {{isDark ? 'theme-dark' : ''}}">
+  <view class="dash-topbar">
+    <view class="dash-brand-row" bindtap="onTapProfile">
+      <view class="dash-avatar-small">
+        <text class="dash-avatar-letter">宝</text>
       </view>
-      <view class="dash-avatar" aria-hidden="true">
-        <text class="dash-avatar-emoji">👶</text>
+      <view class="dash-brand-text">
+        <text class="dash-app-name">育儿笔记</text>
+        <text class="dash-app-sub muted-text">Parently · 设置</text>
       </view>
     </view>
-    <view class="dash-chip-row">
-      <view class="dash-chip dash-chip-on">已登录</view>
-      <view class="dash-chip muted-text">{{user && user.id ? '账号已绑定' : '资料待完善'}}</view>
-    </view>
-    <view class="dash-user mono muted-text">{{user && user.id ? user.id : 'Edge Function 未返回用户 ID'}}</view>
-  </view>
-
-  <view class="section-label muted-text">快捷入口</view>
-
-  <view class="tile-grid">
-    <view
-      class="tile tile-half press-tile"
-      hover-class="tile-active"
-      hover-stay-time="80"
-      bindtap="onTapRecord"
-    >
-      <view class="tile-icon-wrap tile-icon-teal">📝</view>
-      <view class="tile-body">
-        <view class="tile-title">录入</view>
-        <view class="tile-desc muted-text">口述或记下宝宝日常</view>
-      </view>
-      <text class="tile-chevron muted-text">›</text>
-    </view>
-
-    <view
-      class="tile tile-half press-tile"
-      hover-class="tile-active"
-      hover-stay-time="80"
-      bindtap="onTapAsk"
-    >
-      <view class="tile-icon-wrap tile-icon-mint">💬</view>
-      <view class="tile-body">
-        <view class="tile-title">问答</view>
-        <view class="tile-desc muted-text">基于记录的问答占位</view>
-      </view>
-      <text class="tile-chevron muted-text">›</text>
-    </view>
-
-    <view
-      class="tile tile-full press-tile"
-      hover-class="tile-active"
-      hover-stay-time="80"
-      bindtap="onTapGrowth"
-    >
-      <view class="tile-icon-wrap tile-icon-sea">📈</view>
-      <view class="tile-body">
-        <view class="tile-title">成长曲线</view>
-        <view class="tile-desc muted-text">身高体重趋势 · 静态演示</view>
-      </view>
-      <text class="tile-chevron muted-text">›</text>
+    <view class="dash-top-actions">
+      <view class="dash-icon-btn muted-text" bindtap="onTapBabySetup">新建</view>
     </view>
   </view>
 
-  <button class="ghost-button" hover-class="tile-active" bindtap="onTapLogout">退出登录</button>
+  <view class="dash-main">
+    <view class="dash-date muted-text">{{dateLine}}</view>
+    <view class="dash-hero-title">早安，今天也要温柔记录。</view>
+    <view class="dash-hero-lead muted-text">
+      宝宝昨夜睡眠连续性不错。下面是过去 24 小时摘要与一周睡眠波动（静态占位数据）。
+    </view>
+
+    <view class="insight-card card">
+      <view class="insight-badge-row">
+        <text class="insight-emoji">◇</text>
+        <text class="insight-badge">Daily AI Insight</text>
+      </view>
+      <view class="insight-headline">午后小睡的固定窗口，往往决定傍晚的情绪底色</view>
+      <view class="insight-body muted-text">
+        综合近期记录，把午休稳定在 14:00 前后，情绪波动会明显缓和。可在「录入」补充更多细节。
+      </view>
+      <button class="insight-cta accent-fill-button" bindtap="onTapGoAsk">查看详细分析</button>
+    </view>
+
+    <view class="section-row">
+      <view class="section-heading">过去 24 小时</view>
+      <text class="section-link muted-text" bindtap="onTapGoRecord">查看全部记录</text>
+    </view>
+
+    <view class="past-grid">
+      <view class="past-cell card" wx:for="{{past24}}" wx:key="label">
+        <view class="past-cell-top">
+          <text class="past-ico">{{item.icon}}</text>
+          <text class="past-time muted-text">{{item.time}}</text>
+        </view>
+        <view class="past-label muted-text">{{item.label}}</view>
+        <view class="past-value">{{item.main}}</view>
+        <view class="past-sub muted-text">{{item.sub}}</view>
+      </view>
+    </view>
+
+    <view class="bento-stack">
+      <view class="sleep-card card">
+        <view class="sleep-head">
+          <view>
+            <view class="sleep-title">睡眠连续性</view>
+            <view class="sleep-sub muted-text">近 7 晚波动</view>
+          </view>
+          <text class="sleep-more muted-text" bindtap="onTapGoGrowth">···</text>
+        </view>
+        <view class="sleep-bars">
+          <view
+            class="sleep-bar-wrap {{item.on ? 'is-on' : ''}}"
+            wx:for="{{sleepWeek}}"
+            wx:key="d"
+          >
+            <view class="sleep-bar-h" style="height: {{item.h}}%;"></view>
+            <text class="sleep-day {{item.on ? 'sleep-day-on' : ''}}">{{item.d}}</text>
+            <text wx:if="{{item.badge}}" class="sleep-badge">{{item.badge}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="mile-card">
+        <view class="mile-decor" />
+        <view class="mile-body">
+          <view class="mile-icon-wrap">
+            <text class="mile-spark">✦</text>
+          </view>
+          <view class="mile-title">即将到来的里程碑</view>
+          <view class="mile-desc">
+            宝宝正向下一阶段迈进：可留意独坐与对辅食的兴趣（静态演示文案）。
+          </view>
+          <button class="mile-btn" bindtap="onTapBabySetup">阅读准备指南</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="foot-links muted-text">
+      <text class="foot-link" bindtap="onTapProfile">外观与显示</text>
+      <text class="foot-dot">·</text>
+      <text class="foot-link" bindtap="onTapLogout">退出登录</text>
+    </view>
+
+    <view class="dash-foot mono muted-text">
+      {{user && user.id ? user.id : '会话就绪 · 演示环境'}}
+    </view>
+  </view>
 </view>

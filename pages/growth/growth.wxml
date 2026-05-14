@@ -1,39 +1,100 @@
-<view class="page-shell growth-page">
-  <view class="screen-intro">
-    <view class="screen-kicker muted-text">STEP 03</view>
-    <view class="screen-title">成长曲线</view>
-    <view class="screen-desc muted-text">{{note}}</view>
-  </view>
-
-  <view class="chip-strip">
-    <view class="chip chip-active">静态演示</view>
-    <view class="chip chip-quiet muted-text">本月</view>
-    <view class="chip chip-quiet muted-text">本年</view>
-  </view>
-
-  <view class="card chart-card">
-    <view class="chart-head">
-      <view class="chart-title">生长趋势</view>
-      <view class="chart-hint muted-text">占位曲线 · 未接图表库</view>
-    </view>
-    <view class="fake-chart">
-      <view class="fake-grid" />
-      <view class="fake-line" />
-      <view class="fake-dot d1" />
-      <view class="fake-dot d2" />
-      <view class="fake-dot d3" />
-      <view class="fake-dot d4" />
-    </view>
-  </view>
-
-  <view class="card metric-card">
-    <view wx:for="{{metrics}}" wx:key="name" class="metric-row">
-      <view class="metric-left">
-        <view class="metric-dot" />
-        <view class="metric-name">{{item.name}}</view>
+<view class="page-root growth-page {{isDark ? 'theme-dark' : ''}}">
+  <scroll-view class="growth-scroll page-shell has-tab" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="growth-hero">
+      <view class="ds-page-title growth-title">生长曲线</view>
+      <view class="ds-body-lg growth-lead muted-text">
+        跟踪宝宝前 6 个月发育，并与 WHO 标准曲线对照（静态演示）。
       </view>
-      <view class="metric-value">{{item.value}}</view>
-      <view class="metric-hint muted-text">{{item.hint}}</view>
     </view>
-  </view>
+
+    <view class="bento-stack">
+      <view wx:for="{{bento}}" wx:key="key" class="bento-card card">
+        <view class="bento-label ds-label-caps">{{item.label}}</view>
+        <view class="bento-main-row">
+          <text class="bento-val ds-display">{{item.main}}</text>
+          <text wx:if="{{item.unit}}" class="bento-unit">{{item.unit}}</text>
+        </view>
+        <view wx:if="{{item.delta}}" class="bento-delta bento-delta-up">
+          <text class="bento-arrow">↑</text>
+          <text>{{item.delta}}</text>
+        </view>
+        <view wx:if="{{item.sub}}" class="bento-sub muted-text">{{item.sub}}</view>
+      </view>
+    </view>
+
+    <view class="chart-section card">
+      <view class="chart-head-row">
+        <view>
+          <view class="ds-section-heading chart-h1">
+            <block wx:if="{{metricKind === 'weight'}}">体重趋势</block>
+            <block wx:elif="{{metricKind === 'height'}}">身高趋势</block>
+            <block wx:else>头围趋势</block>
+          </view>
+          <view class="chart-sub muted-text">与 WHO 标准生长曲线对照</view>
+        </view>
+      </view>
+
+      <view class="segment">
+        <view
+          class="segment-pill {{metricKind === 'weight' ? 'segment-on' : ''}}"
+          data-k="weight"
+          bindtap="onPickMetric"
+        >体重</view>
+        <view
+          class="segment-pill {{metricKind === 'height' ? 'segment-on' : ''}}"
+          data-k="height"
+          bindtap="onPickMetric"
+        >身高</view>
+        <view
+          class="segment-pill {{metricKind === 'head' ? 'segment-on' : ''}}"
+          data-k="head"
+          bindtap="onPickMetric"
+        >头围</view>
+      </view>
+
+      <view class="who-chart">
+        <view class="who-y">
+          <text wx:for="{{yAxisKg}}" wx:key="*this" class="who-y-label">{{item}}</text>
+        </view>
+        <view class="who-mid">
+          <canvas type="2d" id="growthCanvas" class="who-canvas" disable-scroll="{{true}}" />
+          <view class="who-x">
+            <text wx:for="{{xAxis}}" wx:key="*this" class="who-x-label">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="insight-card card">
+      <view class="insight-head">
+        <view class="insight-icon">🏥</view>
+        <view>
+          <view class="ds-section-heading">儿保洞察</view>
+          <view class="insight-date muted-text">上次更新 · 2023 年 9 月 12 日</view>
+        </view>
+      </view>
+      <view class="insight-body ds-body-lg">{{insight}}</view>
+      <view class="insight-actions">
+        <button class="accent-fill-button insight-btn" bindtap="onTapDownload">下载报告</button>
+        <button class="ghost-btn insight-btn" bindtap="onTapClinic">联系诊所</button>
+      </view>
+    </view>
+
+    <view class="recent-card card">
+      <view class="recent-head">
+        <view class="ds-section-heading">最近记录</view>
+        <text class="recent-link muted-text" bindtap="onTapViewAllLogs">查看全部</text>
+      </view>
+      <view wx:for="{{recentLogs}}" wx:key="title" class="recent-row">
+        <view class="recent-left">
+          <view class="recent-ico">{{item.icon}}</view>
+          <view>
+            <view class="recent-title">{{item.title}}</view>
+            <view class="recent-time muted-text">{{item.time}}</view>
+          </view>
+        </view>
+        <view class="recent-val ds-section-heading">{{item.val}}</view>
+      </view>
+    </view>
+  </scroll-view>
 </view>
