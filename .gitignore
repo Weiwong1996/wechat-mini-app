@@ -12,6 +12,9 @@ Thumbs.db
 .idea/
 .vscode/
 
+# Stitch MCP 脚本本地生成物
+stitch-output.json
+
 # 日志与临时文件
 *.log
 npm-debug.log*

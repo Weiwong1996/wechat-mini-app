@@ -1,0 +1,15 @@
+<view class="page-shell record-page">
+  <view class="card record-card">
+    <view class="section-title">自然语言记录</view>
+    <view class="section-hint muted-text">例如：宝宝今天身高 72cm，体重 9.5kg，第一次翻身。</view>
+    <textarea
+      class="record-textarea"
+      placeholder="在此输入或粘贴内容…"
+      maxlength="2000"
+      value="{{body}}"
+      bindinput="onInputBody"
+      show-confirm-bar="{{false}}"
+    />
+    <button class="submit-button" bindtap="onTapSubmit">提交</button>
+  </view>
+</view>

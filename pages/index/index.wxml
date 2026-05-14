@@ -1,20 +1,36 @@
-<view class="page-shell home-page">
-  <view class="card home-card">
-    <view class="status-badge">已登录</view>
-    <view class="home-title">认证状态正常</view>
-    <view class="home-description muted-text">
-      本页从本地存储读取 Supabase 登录态，用于确认微信登录流程已经完成。
-    </view>
+<view class="page-shell dashboard-page">
+  <view class="dash-header">
+    <view class="dash-eyebrow muted-text">工作台</view>
+    <view class="dash-greeting">你好，欢迎回来</view>
+    <view class="dash-caption muted-text">选择下方功能开始记录与查询</view>
+  </view>
 
-    <view class="session-panel">
-      <view class="session-label muted-text">当前用户</view>
-      <view class="session-value">
-        {{user && user.id ? user.id : 'Edge Function 未返回用户 ID'}}
-      </view>
+  <view class="card session-banner">
+    <view class="session-row">
+      <view class="status-pill">已登录</view>
+      <view class="session-meta muted-text">{{user && user.id ? '用户已绑定' : '待完善资料'}}</view>
     </view>
+    <view class="session-user mono">{{user && user.id ? user.id : 'Edge Function 未返回用户 ID'}}</view>
+  </view>
 
-    <button class="logout-button" bindtap="onTapLogout">
-      退出登录
+  <view class="shortcuts-title muted-text">功能入口</view>
+  <view class="shortcuts-grid">
+    <button class="shortcut-card shortcut-record" hover-class="shortcut-hover" bindtap="onTapRecord">
+      <view class="shortcut-icon">记</view>
+      <view class="shortcut-label">录入</view>
+      <view class="shortcut-desc muted-text">口述或文字记下宝宝日常</view>
+    </button>
+    <button class="shortcut-card shortcut-ask" hover-class="shortcut-hover" bindtap="onTapAsk">
+      <view class="shortcut-icon">问</view>
+      <view class="shortcut-label">问答</view>
+      <view class="shortcut-desc muted-text">基于记录的智能问答（静态占位）</view>
+    </button>
+    <button class="shortcut-card shortcut-growth" hover-class="shortcut-hover" bindtap="onTapGrowth">
+      <view class="shortcut-icon">长</view>
+      <view class="shortcut-label">成长曲线</view>
+      <view class="shortcut-desc muted-text">身高体重等趋势（静态演示）</view>
     </button>
   </view>
+
+  <button class="logout-button" bindtap="onTapLogout">退出登录</button>
 </view>

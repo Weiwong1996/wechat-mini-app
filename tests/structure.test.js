@@ -7,7 +7,10 @@ const jsonFiles = [
   'project.config.json',
   'sitemap.json',
   'pages/login/login.json',
-  'pages/index/index.json'
+  'pages/index/index.json',
+  'pages/record/record.json',
+  'pages/ask/ask.json',
+  'pages/growth/growth.json'
 ]
 
 const requiredFiles = [
@@ -25,7 +28,19 @@ const requiredFiles = [
   'pages/index/index.js',
   'pages/index/index.wxml',
   'pages/index/index.wxss',
-  'pages/index/index.json'
+  'pages/index/index.json',
+  'pages/record/record.js',
+  'pages/record/record.wxml',
+  'pages/record/record.wxss',
+  'pages/record/record.json',
+  'pages/ask/ask.js',
+  'pages/ask/ask.wxml',
+  'pages/ask/ask.wxss',
+  'pages/ask/ask.json',
+  'pages/growth/growth.js',
+  'pages/growth/growth.wxml',
+  'pages/growth/growth.wxss',
+  'pages/growth/growth.json'
 ]
 
 test('miniprogram JSON files are valid', () => {
@@ -40,11 +55,14 @@ test('required miniprogram files exist', () => {
   }
 })
 
-test('app.json registers login and index pages in order', () => {
+test('app.json registers expected pages', () => {
   const appJson = JSON.parse(fs.readFileSync('app.json', 'utf8'))
 
   assert.deepEqual(appJson.pages, [
     'pages/login/login',
-    'pages/index/index'
+    'pages/index/index',
+    'pages/record/record',
+    'pages/ask/ask',
+    'pages/growth/growth'
   ])
 })

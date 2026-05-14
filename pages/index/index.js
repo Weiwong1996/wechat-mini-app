@@ -22,6 +22,18 @@ Page({
     })
   },
 
+  onTapRecord() {
+    wx.navigateTo({ url: '/pages/record/record' })
+  },
+
+  onTapAsk() {
+    wx.navigateTo({ url: '/pages/ask/ask' })
+  },
+
+  onTapGrowth() {
+    wx.navigateTo({ url: '/pages/growth/growth' })
+  },
+
   onTapLogout() {
     clearStoredSession()
 

@@ -1,0 +1,52 @@
+.record-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.record-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  padding: 32rpx;
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.section-hint {
+  font-size: 26rpx;
+  line-height: 1.55;
+}
+
+.record-textarea {
+  width: 100%;
+  min-height: 280rpx;
+  box-sizing: border-box;
+  padding: 24rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid var(--border);
+  background: var(--muted);
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: var(--foreground);
+}
+
+.submit-button {
+  margin-top: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96rpx;
+  border-radius: 24rpx;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.submit-button::after {
+  border: none;
+}

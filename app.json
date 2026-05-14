@@ -1,7 +1,10 @@
 {
   "pages": [
     "pages/login/login",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/record/record",
+    "pages/ask/ask",
+    "pages/growth/growth"
   ],
   "window": {
     "navigationBarTitleText": "Supabase 微信登录",

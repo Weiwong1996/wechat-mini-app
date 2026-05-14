@@ -1,0 +1,23 @@
+<view class="page-shell ask-page">
+  <view class="card ask-card">
+    <view class="input-row">
+      <input
+        class="ask-input"
+        placeholder="输入你想问的问题…"
+        value="{{question}}"
+        bindinput="onInputQuestion"
+        confirm-type="send"
+        bindconfirm="onTapSend"
+      />
+      <button class="send-button" bindtap="onTapSend">发送</button>
+    </view>
+
+    <view class="block-title muted-text">回答</view>
+    <view class="answer-block">{{answer}}</view>
+
+    <view class="block-title muted-text">引用</view>
+    <view class="citation-list">
+      <view class="citation-item" wx:for="{{citations}}" wx:key="*this">{{item}}</view>
+    </view>
+  </view>
+</view>

@@ -1,57 +1,146 @@
-.home-page {
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+  align-items: stretch;
+}
+
+.dash-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.dash-eyebrow {
+  font-size: 22rpx;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.dash-greeting {
+  color: var(--foreground);
+  font-size: 42rpx;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.dash-caption {
+  font-size: 26rpx;
+  line-height: 1.5;
+}
+
+.session-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+  padding: 28rpx 32rpx;
+  border: 1rpx solid var(--border);
+  border-radius: 28rpx;
+  background: var(--accent-soft);
+  box-shadow: 0 12rpx 40rpx rgba(13, 148, 136, 0.12);
+}
+
+.session-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.status-pill {
+  align-self: flex-start;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1rpx solid var(--border);
+  color: var(--accent-strong);
+  font-size: 22rpx;
+  font-weight: 700;
+  padding: 8rpx 16rpx;
+}
+
+.session-meta {
+  font-size: 24rpx;
+}
+
+.session-user {
+  font-size: 26rpx;
+  line-height: 1.45;
+  word-break: break-all;
+}
+
+.mono {
+  font-family: ui-monospace, monospace;
+}
+
+.shortcuts-title {
+  font-size: 24rpx;
+  font-weight: 600;
+  margin-top: 8rpx;
+}
+
+.shortcuts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.shortcut-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10rpx;
+  padding: 28rpx 28rpx 32rpx;
+  border-radius: 28rpx;
+  border: 1rpx solid var(--border);
+  background: var(--card);
+  text-align: left;
+  line-height: 1.35;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.shortcut-card::after {
+  border: none;
+}
+
+.shortcut-hover {
+  opacity: 0.92;
+  transform: scale(0.99);
+}
+
+.shortcut-record {
+  border-left: 8rpx solid var(--accent);
+}
+
+.shortcut-ask {
+  border-left: 8rpx solid #14b8a6;
+}
+
+.shortcut-growth {
+  border-left: 8rpx solid #2dd4bf;
+}
+
+.shortcut-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 20rpx;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 34rpx;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.home-card {
-  display: flex;
-  width: 100%;
-  box-sizing: border-box;
-  flex-direction: column;
-  gap: 28rpx;
-  padding: 40rpx;
-}
-
-.status-badge {
-  align-self: flex-start;
-  border-radius: 999rpx;
-  background: var(--muted);
-  color: var(--foreground);
-  font-size: 24rpx;
-  font-weight: 600;
-  padding: 10rpx 18rpx;
-}
-
-.home-title {
-  color: var(--foreground);
-  font-size: 44rpx;
+.shortcut-label {
+  font-size: 34rpx;
   font-weight: 700;
-}
-
-.home-description {
-  font-size: 28rpx;
-  line-height: 1.7;
-}
-
-.session-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 12rpx;
-  border: 1rpx solid var(--border);
-  border-radius: 24rpx;
-  padding: 24rpx;
-}
-
-.session-label {
-  font-size: 24rpx;
-}
-
-.session-value {
   color: var(--foreground);
-  font-size: 26rpx;
+}
+
+.shortcut-desc {
+  font-size: 24rpx;
   line-height: 1.5;
-  word-break: break-all;
 }
 
 .logout-button {
@@ -59,10 +148,15 @@
   align-items: center;
   justify-content: center;
   min-height: 88rpx;
+  margin-top: 24rpx;
   border: 1rpx solid var(--border);
   border-radius: 20rpx;
   background: var(--card);
   color: var(--foreground);
   font-size: 30rpx;
   font-weight: 600;
+}
+
+.logout-button::after {
+  border: none;
 }
