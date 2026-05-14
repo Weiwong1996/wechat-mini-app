@@ -1,0 +1,230 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#010101",
+                        "on-tertiary-container": "#878482",
+                        "on-primary-fixed": "#1b1b1b",
+                        "outline": "#747878",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "on-secondary-container": "#65645f",
+                        "surface": "#fdf8f8",
+                        "on-error-container": "#93000a",
+                        "background": "#fdf8f8",
+                        "on-secondary-fixed-variant": "#474742",
+                        "primary-fixed": "#e5e2e1",
+                        "surface-tint": "#5f5e5e",
+                        "on-background": "#1c1b1b",
+                        "on-primary-container": "#858484",
+                        "tertiary-fixed-dim": "#cac6c4",
+                        "on-secondary-fixed": "#1c1c18",
+                        "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8",
+                        "inverse-surface": "#313030",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e5e2e1",
+                        "tertiary-fixed": "#e6e2df",
+                        "on-surface-variant": "#444748",
+                        "on-error": "#ffffff",
+                        "primary": "#010101",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#474746",
+                        "on-tertiary-fixed": "#1c1b1a",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e5e2db",
+                        "inverse-primary": "#c8c6c5",
+                        "secondary-fixed": "#e5e2db",
+                        "surface-bright": "#fdf8f8",
+                        "surface-container-highest": "#e5e2e1",
+                        "tertiary-container": "#1d1c1b",
+                        "outline-variant": "#c4c7c7",
+                        "primary-container": "#1c1c1c",
+                        "surface-container": "#f1edec",
+                        "inverse-on-surface": "#f4f0ef",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "secondary": "#5f5e59",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#c9c6c0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ebe7e6",
+                        "surface-container-low": "#f7f3f2",
+                        "parchment": "#f7f4ed",
+                        "charcoal": "#1c1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #f7f4ed; color: #1c1c1c; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .chat-bubble-ai { background-color: #f1edec; border: 1px solid #eceae4; }
+        .chat-bubble-user { background-color: #1c1c1c; color: #fcfbf8; box-shadow: rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px 0px; }
+        .inset-button { box-shadow: rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px 0px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <style data-stitch-cursor=""></style><style data-stitch-scroll-lock=""></style></head>
+<body class="flex flex-col min-h-screen">
+<!-- Header (Back-to-Main Exception per instructions) -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-4 py-4 bg-parchment border-b border-[#eceae4]">
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-black/5 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-xl font-semibold tracking-tight">Parenting Assistant</h1>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-black/5 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<!-- Chat Viewport -->
+<main class="flex-1 overflow-y-auto px-4 py-6 max-w-3xl mx-auto w-full space-y-8">
+<!-- Assistant Message -->
+<div class="flex items-start gap-4">
+<div class="size-10 rounded-full bg-surface-container overflow-hidden shrink-0 border border-[#eceae4]">
+<img class="w-full h-full object-cover" data-alt="A professional and friendly AI avatar illustration with soft, warm lighting. The aesthetic is clean and modern, featuring muted tones and a minimalist style that fits a premium parenting application. The background is a soft parchment cream with subtle gradients." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXkz0sD8FILNr89mCtZlbEwaNvQW_ZStK2CwFTJ1q7AuVQV1QFWxWrENZDDF4K_7Ai2j19uCcCDv-M0S9kWIfXRIumEv9uVJkW0oJKO0IyFBGCNlQBZrzcZLPCLwEtmaKVQWc1uxsswycbbw7xFrtzDiSFiq4BiGo-_Ic_64BdwXFzq1rOOZnHa3pXVPPh1XXe65ONNC50vWKeQ4NhMD8-SvOaOKJzwjfYmQzUeffQhWyC4B6HfrJNyWDv-B9ioOcQ4pK220mRtDgj">
+</div>
+<div class="flex flex-col gap-2 max-w-[85%]">
+<span class="text-xs font-medium text-on-surface-variant ml-1 uppercase tracking-wider">Assistant • Now</span>
+<div class="chat-bubble-ai p-4 rounded-xl rounded-tl-none">
+<p class="text-base leading-relaxed">
+                        Hello! I'm your dedicated parenting assistant. I can help you with sleep schedules, feeding logs, or development milestones. How can I help you and your little one today?
+                    </p>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex items-start gap-4 flex-row-reverse">
+<div class="size-10 rounded-full bg-charcoal overflow-hidden shrink-0 flex items-center justify-center">
+<span class="text-parchment text-sm font-semibold">ME</span>
+</div>
+<div class="flex flex-col gap-2 max-w-[85%] items-end">
+<span class="text-xs font-medium text-on-surface-variant mr-1 uppercase tracking-wider">You • 2m ago</span>
+<div class="chat-bubble-user p-4 rounded-xl rounded-tr-none">
+<p class="text-base leading-relaxed">
+                        My 4-month-old is suddenly waking up every 2 hours. Is this sleep regression?
+                    </p>
+</div>
+</div>
+</div>
+<!-- Assistant Message Detailed -->
+<div class="flex items-start gap-4 pb-40">
+<div class="size-10 rounded-full bg-surface-container overflow-hidden shrink-0 border border-[#eceae4]">
+<img class="w-full h-full object-cover" data-alt="A professional and friendly AI avatar illustration with soft, warm lighting. The aesthetic is clean and modern, featuring muted tones and a minimalist style that fits a premium parenting application. The background is a soft parchment cream with subtle gradients." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUzFy5uIf6HDcChKyY34cm3r9JDtqFXAxiEx0bejuJFHcHrr33mtgaI1k5a-oXccV3boMkCBsaABIYtDQxHrrnsNTogiqqB6ymPADi1U0lLi3wYyidkqCPZMRsW6D_N3C_zO6LGloP_Gk-97LYnbSIvcscrR7Z-0dNKnF0jSFgjTTlQBORutedZMlcNreYJXcfsDoc4mAr9KGiv-c4bhhfnCXUUmP_w2defxSxsMcPsue2Jx-9iKfvs6qu0IrN--w2RS36xcCag6op">
+</div>
+<div class="flex flex-col gap-2 max-w-[85%]">
+<span class="text-xs font-medium text-on-surface-variant ml-1 uppercase tracking-wider">Assistant • Just now</span>
+<div class="chat-bubble-ai p-4 rounded-xl rounded-tl-none space-y-4">
+<p class="text-base leading-relaxed">
+                        It sounds like your baby is experiencing the common 4-month sleep regression. This is actually a positive sign of development as their sleep cycles mature and become more like adults.
+                    </p>
+<div class="space-y-2">
+<p class="font-semibold text-sm uppercase tracking-wide opacity-80">Tips to manage this phase:</p>
+<ul class="space-y-3">
+<li class="flex gap-3 text-base leading-snug">
+<span class="size-1.5 rounded-full bg-charcoal mt-2 shrink-0"></span>
+<span class="">Maintain a consistent bedtime routine (bath, book, bed).</span>
+</li>
+<li class="flex gap-3 text-base leading-snug">
+<span class="size-1.5 rounded-full bg-charcoal mt-2 shrink-0"></span>
+<span class="">Ensure the sleep environment is dark, cool, and quiet.</span>
+</li>
+<li class="flex gap-3 text-base leading-snug">
+<span class="size-1.5 rounded-full bg-charcoal mt-2 shrink-0"></span>
+<span class="">Practice 'drowsy but awake' transitions to encourage self-soothing.</span>
+</li>
+<li class="flex gap-3 text-base leading-snug">
+<span class="size-1.5 rounded-full bg-charcoal mt-2 shrink-0"></span>
+<span class="">Monitor wake windows carefully (usually 1.5–2 hours at this age).</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Prominent Chat Input Area -->
+<footer class="fixed left-0 right-0 p-4 bg-parchment/80 backdrop-blur-md border-t border-[#eceae4] bottom-[68px]">
+<div class="max-w-3xl mx-auto space-y-4">
+<!-- Pill-shaped quick actions -->
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-4 py-2 rounded-full border border-[#eceae4] bg-white text-sm font-medium whitespace-nowrap hover:bg-parchment transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">sleep</span>
+                    Sleep Log
+                </button>
+<button class="px-4 py-2 rounded-full border border-[#eceae4] bg-white text-sm font-medium whitespace-nowrap hover:bg-parchment transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+                    Feeding Advice
+                </button>
+<button class="px-4 py-2 rounded-full border border-[#eceae4] bg-white text-sm font-medium whitespace-nowrap hover:bg-parchment transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">straighten</span>
+                    Growth Tracker
+                </button>
+<button class="px-4 py-2 rounded-full border border-[#eceae4] bg-white text-sm font-medium whitespace-nowrap hover:bg-parchment transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                    Schedule
+                </button>
+</div>
+<!-- Input Bar -->
+<div class="relative flex items-center gap-2">
+<div class="flex-1 relative">
+<input class="w-full h-14 pl-5 pr-14 rounded-2xl border border-[#eceae4] bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-base placeholder:text-on-surface-variant/50 shadow-sm transition-all" placeholder="Ask about sleep, feeding, or development..." type="text">
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+<button class="size-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-black/5 transition-colors">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+</div>
+</div>
+<button class="size-14 rounded-2xl bg-charcoal text-parchment flex items-center justify-center inset-button hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</footer><nav class="fixed bottom-0 left-0 right-0 bg-parchment border-t border-[#eceae4] px-4 pb-2 pt-3 flex justify-between items-center z-[60]">
+  <a href="#" class="flex flex-col items-center gap-1 flex-1 text-charcoal opacity-60">
+    <span class="material-symbols-outlined text-[24px]">grid_view</span>
+    <span class="text-[10px] font-medium uppercase tracking-wider">Dashboard</span>
+  </a>
+  <a href="#" class="flex flex-col items-center gap-1 flex-1 text-charcoal opacity-60">
+    <span class="material-symbols-outlined text-[24px]">description</span>
+    <span class="text-[10px] font-medium uppercase tracking-wider">Records</span>
+  </a>
+  <a href="#" class="flex flex-col items-center gap-1 flex-1 text-charcoal">
+    <div class="bg-charcoal/5 rounded-full px-4 py-1 flex flex-col items-center">
+      <span class="material-symbols-outlined text-[24px] font-bold">chat</span>
+      <span class="text-[10px] font-bold uppercase tracking-wider">Ask</span>
+    </div>
+  </a>
+  <a href="#" class="flex flex-col items-center gap-1 flex-1 text-charcoal opacity-60">
+    <span class="material-symbols-outlined text-[24px]">trending_up</span>
+    <span class="text-[10px] font-medium uppercase tracking-wider">Growth</span>
+  </a>
+</nav>
+<!-- Style for hiding scrollbar -->
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+
+</body></html>

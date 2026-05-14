@@ -1,0 +1,248 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#484645",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-high": "#ebe7e6",
+                        "secondary-container": "#e5e2db",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "inverse-surface": "#313030",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#cac6c4",
+                        "primary": "#010101",
+                        "surface": "#fdf8f8",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c4c7c7",
+                        "surface-tint": "#5f5e5e",
+                        "on-secondary-fixed-variant": "#474742",
+                        "on-secondary-container": "#65645f",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#f1edec",
+                        "on-tertiary-container": "#878482",
+                        "inverse-on-surface": "#f4f0ef",
+                        "on-primary-container": "#858484",
+                        "on-primary-fixed": "#1b1b1b",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#c9c6c0",
+                        "inverse-primary": "#c8c6c5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#1c1b1a",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#ddd9d8",
+                        "on-secondary-fixed": "#1c1c18",
+                        "primary-fixed": "#e5e2e1",
+                        "primary-container": "#1c1c1c",
+                        "surface-bright": "#fdf8f8",
+                        "on-surface": "#1c1b1b",
+                        "background": "#fdf8f8",
+                        "on-surface-variant": "#444748",
+                        "secondary-fixed": "#e5e2db",
+                        "tertiary": "#010101",
+                        "outline": "#747878",
+                        "on-background": "#1c1b1b",
+                        "tertiary-container": "#1d1c1b",
+                        "surface-container-highest": "#e5e2e1",
+                        "secondary": "#5f5e59",
+                        "tertiary-fixed": "#e6e2df",
+                        "on-primary-fixed-variant": "#474746",
+                        "surface-container-low": "#f7f3f2",
+                        "error": "#ba1a1a",
+                        "background-parchment": "#F7F4ED",
+                        "border-subtle": "#ECEAE4",
+                        "border-interactive": "rgba(28, 28, 28, 0.4)"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "display": ["Manrope"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            background-color: #F7F4ED;
+            color: #1C1C1C;
+            min-height: 100dvh;
+        }
+        .inset-shadow-primary {
+            box-shadow: rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px 0px;
+        }
+    </style>
+<style data-stitch-cursor=""></style><style data-stitch-scroll-lock=""></style></head>
+<body class="font-body selection:bg-primary-fixed antialiased">
+<header class="w-full sticky top-0 z-50 bg-background-parchment border-b border-surface-variant">
+<div class="flex justify-between items-center px-4 py-3 w-full max-w-[1200px] mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-border-subtle">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOGUlS2aFYEm7Oekdnm4MIno5laFlmN3GtuqwGPvFF9aT51paZeSSlp9_oEhoB74QEhK_dv9Pfi7Y33CsbYWxcxqP_oN7lGCpSg7H2ttSKCxWWlakZCcnahtUPZk3CgZdkWlHi2Mbae8ZMkVJyzdfrbfkOo5HFUVJXymVxOc6Ljff_UVcYzLpcRm2ugIht21j9f0Ffy_0AKHdP6I12_RV2tST-yJGEEoyNXOW0Ep4JQpVHL6gMSp0m4w4_gD552PfeDUxQ7yDPrZ8k">
+</div>
+<h1 class="font-headline text-[24px] font-semibold tracking-[-0.9px] text-primary">Parently</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-secondary hover:opacity-80 transition-opacity active:scale-95">notifications</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-4 pt-8 pb-32">
+<section class="mb-10">
+<h2 class="font-headline text-[36px] font-semibold tracking-[-0.9px] leading-[1.10] mb-6">Records</h2>
+<div class="relative mb-6">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary opacity-50">search</span>
+<input class="w-full bg-background-parchment border border-border-interactive rounded-lg pl-12 pr-4 py-3 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-secondary/50" placeholder="Search milestones or daily logs..." type="text">
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-5 py-2 rounded-full border border-primary bg-primary text-on-primary text-[14px] font-medium transition-all">All</button>
+<button class="px-5 py-2 rounded-full border border-border-interactive bg-transparent text-primary text-[14px] hover:bg-surface-container transition-all">Growth</button>
+<button class="px-5 py-2 rounded-full border border-border-interactive bg-transparent text-primary text-[14px] hover:bg-surface-container transition-all">Feeding</button>
+<button class="px-5 py-2 rounded-full border border-border-interactive bg-transparent text-primary text-[14px] hover:bg-surface-container transition-all">Sleep</button>
+</div>
+</section>
+<section class="space-y-10">
+<!-- Today -->
+<div>
+<h3 class="font-headline text-[14px] font-semibold text-secondary mb-4 uppercase tracking-[0.05em]">Today</h3>
+<div class="space-y-4">
+<!-- Feeding Log -->
+<div class="p-5 bg-background-parchment border border-border-subtle rounded-xl hover:border-outline transition-colors group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">nutrition</span>
+</div>
+<div>
+<p class="font-headline text-[18px] font-medium">Mid-day Feeding</p>
+<p class="text-[14px] text-secondary">12:30 PM • 150ml Formula</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-[12px] font-medium text-secondary flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                Indexed
+                            </span>
+</div>
+<p class="text-secondary leading-[1.50] text-[16px]">Ate well, seemed very hungry. Settled down quickly for a nap afterwards.</p>
+</div>
+<!-- Sleep Log -->
+<div class="p-5 bg-background-parchment border border-border-subtle rounded-xl hover:border-outline transition-colors group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">bedtime</span>
+</div>
+<div>
+<p class="font-headline text-[18px] font-medium">Morning Nap</p>
+<p class="text-[14px] text-secondary">09:15 AM • 1h 20m</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-[12px] font-medium text-secondary flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                                Indexing
+                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Yesterday -->
+<div>
+<h3 class="font-headline text-[14px] font-semibold text-secondary mb-4 uppercase tracking-[0.05em]">Yesterday</h3>
+<div class="space-y-4">
+<!-- Growth Log -->
+<div class="p-5 bg-background-parchment border border-border-subtle rounded-xl hover:border-outline transition-colors group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">straighten</span>
+</div>
+<div>
+<p class="font-headline text-[18px] font-medium">Growth Check</p>
+<p class="text-[14px] text-secondary">04:45 PM • Weight &amp; Length</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-[12px] font-medium text-secondary flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                Indexed
+                            </span>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-4">
+<div class="bg-surface-container p-3 rounded-lg">
+<p class="text-[12px] text-secondary uppercase font-medium">Weight</p>
+<p class="text-[20px] font-semibold">6.4 kg</p>
+</div>
+<div class="bg-surface-container p-3 rounded-lg">
+<p class="text-[12px] text-secondary uppercase font-medium">Length</p>
+<p class="text-[20px] font-semibold">62 cm</p>
+</div>
+</div>
+</div>
+<!-- Milestone Log -->
+<div class="p-5 bg-background-parchment border border-border-subtle rounded-xl hover:border-outline transition-colors group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">sentiment_very_satisfied</span>
+</div>
+<div>
+<p class="font-headline text-[18px] font-medium">Milestone: First Smile</p>
+<p class="text-[14px] text-secondary">10:10 AM • Emotional Growth</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-[12px] font-medium text-secondary flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                Indexed
+                            </span>
+</div>
+<div class="mt-4 rounded-lg overflow-hidden border border-border-subtle aspect-video">
+<img alt="Newborn baby smiling" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDeGD3P0HHp-D0wvMz5Si3-ICpG5HQPt5vmjvah7XMFpKkAC_6vwpeeFbOPN9W4-Nkv4-Aw2j-srHw8GUGS3ndD3zSpzd28UQ23y35eU1Hp5IlhIUj16WkCVOQD7W9T_He9vyo02ZecA9Ksoz7Q2VzkUJ9t2Z1Gf9IwM55eGh-eGls244TtP-78gcfRX8yCqq1NxlwIL1CRUa7-y53xOJxxwkbU7xUvKlogsjyHleiwRtaZNBbieOUKhqvo2wcg1LAmc6n-0YO6VHr">
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<button class="fixed right-6 bottom-24 w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center z-50 inset-shadow-primary active:scale-95 transition-transform shadow-xl">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-[#f7f4ed] border-t border-[#eceae4] flex justify-around items-center px-4 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center text-[rgba(28,28,28,0.4)] hover:text-[#1c1c1c] transition-colors" href="#"><span class="material-symbols-outlined">dashboard</span><span class="font-label text-[12px] mt-1">Dashboard</span></a>
+<a class="flex flex-col items-center justify-center text-[#1c1c1c] font-semibold" href="#"><span class="material-symbols-outlined">description</span><span class="font-label text-[12px] mt-1">Records</span></a>
+<a class="flex flex-col items-center justify-center text-[rgba(28,28,28,0.4)] hover:text-[#1c1c1c] transition-colors" href="#"><span class="material-symbols-outlined">smart_toy</span><span class="font-label text-[12px] mt-1">Ask</span></a>
+<a class="flex flex-col items-center justify-center text-[rgba(28,28,28,0.4)] hover:text-[#1c1c1c] transition-colors" href="#"><span class="material-symbols-outlined">trending_up</span><span class="font-label text-[12px] mt-1">Growth</span></a>
+</nav>
+
+
+</body></html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#010101",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#1c1c1c",
+                        "on-primary-container": "#858484",
+                        "secondary": "#5f5e59",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e5e2db",
+                        "on-secondary-container": "#65645f",
+                        "tertiary": "#010101",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fdf8f8",
+                        "on-background": "#1c1b1b",
+                        "surface": "#fdf8f8",
+                        "on-surface": "#1c1b1b",
+                        "surface-variant": "#e5e2e1",
+                        "on-surface-variant": "#444748",
+                        "outline": "#747878",
+                        "outline-variant": "#c4c7c7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f7f3f2",
+                        "surface-container": "#f1edec",
+                        "surface-container-high": "#ebe7e6",
+                        "surface-container-highest": "#e5e2e1",
+                        "background-parchment": "#f7f4ed",
+                        "charcoal-primary": "#1c1c1c",
+                        "muted-gray": "#5f5f5d",
+                        "border-subtle": "#eceae4"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope", "sans-serif"],
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #f7f4ed;
+            color: #1c1c1c;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .inset-shadow-button {
+            box-shadow: rgba(255, 255, 255, 0.2) 0px 0.5px 0px 0px inset, rgba(0, 0, 0, 0.2) 0px 0px 0px 0.5px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+        }
+        .editorial-hero {
+            letter-spacing: -1.5px;
+            line-height: 1.05;
+        }
+    </style>
+<style data-stitch-cursor=""></style><style data-stitch-scroll-lock=""></style></head>
+<body class="font-body min-h-screen pb-24">
+<!-- TopAppBar Navigation -->
+<header class="w-full sticky top-0 z-50 bg-background-parchment border-b border-surface-variant">
+<div class="flex justify-between items-center px-4 py-3 w-full max-w-[1200px] mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-border-subtle">
+<img alt="User profile photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvosI5z5Zuw3E6kIalvSUb7FSkQMYW9evbCs2qHhYgWgoLfmZq8mmqQDTQw7oiHMlxzAQQcbL7dNn0R6AaeWdRzNHvv1TsXoHBJzEw3TDN9fp7h3RxJoNIGCU5gr0ZigDpMvLsSQKkqNmukeu2nGeTPC3bNweUu6UMu4V3H8NoeMFGraEOaYycp1D654xxy33DOigJHJJGBvbMatUPaUudF8NY8f-OGRFqrkzMnJEK_pFxph3I4FuFSbJtqkiKAGf2uUW544QmIXTp">
+</div>
+<h1 class="font-headline text-[24px] font-semibold tracking-[-0.9px] text-charcoal-primary">Parently</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-secondary hover:opacity-80 transition-opacity p-2 active:scale-95">notifications</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-4 py-8">
+<!-- Hero Section -->
+<section class="mb-10">
+<p class="text-muted-gray font-label text-[14px] mb-2">Wednesday, May 24</p>
+<h2 class="font-headline text-[48px] font-semibold editorial-hero text-charcoal-primary mb-2">Good morning, Sarah.</h2>
+<p class="text-muted-gray text-lg max-w-2xl">Leo had a restful 8-hour stretch last night. Here is your daily overview.</p>
+</section>
+<!-- Daily AI Insight Section -->
+<section class="mb-12">
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 md:p-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container opacity-[0.03] rounded-bl-full"></div>
+<div class="relative z-10 flex flex-col gap-6">
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-charcoal-primary text-[20px]">smart_toy</span>
+<span class="font-label text-[12px] font-bold tracking-widest text-charcoal-primary uppercase">Daily AI Insight</span>
+</div>
+<h3 class="font-headline text-[24px] font-normal leading-tight mb-3 text-charcoal-primary">Leo's fussiness yesterday likely correlates with a shorter afternoon nap.</h3>
+<p class="text-muted-gray text-base leading-relaxed max-w-2xl">Based on the last 14 days, consistency in the 2:00 PM nap window improves his evening mood by 40%. Try extending today's quiet time.</p>
+</div>
+<div>
+<button class="bg-charcoal-primary text-white font-body px-6 py-3 rounded-lg inset-shadow-button hover:opacity-90 transition-all active:scale-95 whitespace-nowrap">View detailed analysis</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Past 24 Hours Summary Grid -->
+<section class="mb-12">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline text-[20px] font-semibold text-charcoal-primary">Past 24 Hours</h4>
+<a class="text-[14px] text-muted-gray underline hover:text-charcoal-primary transition-colors" href="#">See all records</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Feeding Card -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-5">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-secondary">restaurant</span>
+<span class="text-[12px] text-muted-gray">2h ago</span>
+</div>
+<p class="text-[14px] text-muted-gray mb-1">Feeding</p>
+<p class="text-[24px] font-semibold text-charcoal-primary">6.5 <span class="text-[14px] font-normal">oz</span></p>
+<p class="text-[12px] text-muted-gray mt-2">Total: 28oz today</p>
+</div>
+<!-- Sleep Card -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-5">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-secondary">bedtime</span>
+<span class="text-[12px] text-muted-gray">45m ago</span>
+</div>
+<p class="text-[14px] text-muted-gray mb-1">Sleep</p>
+<p class="text-[24px] font-semibold text-charcoal-primary">11.2 <span class="text-[14px] font-normal">hrs</span></p>
+<div class="text-[12px] text-charcoal-primary font-medium mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 15% vs avg
+                    </div>
+</div>
+<!-- Mood Card -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-5">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-secondary">sentiment_satisfied</span>
+<span class="text-[12px] text-muted-gray">Current</span>
+</div>
+<p class="text-[14px] text-muted-gray mb-1">Mood</p>
+<p class="text-[24px] font-semibold text-charcoal-primary">Calm</p>
+<p class="text-[12px] text-muted-gray mt-2">Stable for 3h</p>
+</div>
+<!-- Diapers Card -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-5">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-secondary">baby_changing_station</span>
+<span class="text-[12px] text-muted-gray">1h ago</span>
+</div>
+<p class="text-[14px] text-muted-gray mb-1">Diapers</p>
+<p class="text-[24px] font-semibold text-charcoal-primary">6 <span class="text-[14px] font-normal">wet</span></p>
+<p class="text-[12px] text-muted-gray mt-2">Last: 9:15 AM</p>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Charts & Milestones -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Sleep Consistency Chart Card -->
+<div class="md:col-span-2 bg-surface-container-lowest border border-border-subtle rounded-xl p-6">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="font-headline text-[20px] font-semibold mb-1 text-charcoal-primary">Sleep Consistency</h4>
+<p class="text-[14px] text-muted-gray">Last 7 nights variance</p>
+</div>
+<button class="material-symbols-outlined p-2 hover:bg-surface-container rounded-full text-secondary">more_horiz</button>
+</div>
+<div class="h-48 flex items-end justify-between gap-2 px-2">
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-secondary-container rounded-t-sm h-[60%]"></div>
+<span class="text-[12px] text-muted-gray">Mon</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-secondary-container rounded-t-sm h-[75%]"></div>
+<span class="text-[12px] text-muted-gray">Tue</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-charcoal-primary rounded-t-sm h-[90%] relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-[12px] font-bold text-charcoal-primary">12.8h</div>
+</div>
+<span class="text-[12px] text-charcoal-primary font-bold">Wed</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-secondary-container rounded-t-sm h-[45%]"></div>
+<span class="text-[12px] text-muted-gray">Thu</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-secondary-container rounded-t-sm h-[80%]"></div>
+<span class="text-[12px] text-muted-gray">Fri</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-secondary-container rounded-t-sm h-[70%]"></div>
+<span class="text-[12px] text-muted-gray">Sat</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-secondary-container rounded-t-sm h-[65%]"></div>
+<span class="text-[12px] text-muted-gray">Sun</span>
+</div>
+</div>
+</div>
+<!-- Upcoming Milestone Card -->
+<div class="bg-charcoal-primary text-white rounded-xl p-6 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white opacity-[0.05] rounded-full"></div>
+<div class="relative z-10">
+<div class="bg-white/10 w-10 h-10 rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[20px] text-white">stars</span>
+</div>
+<h4 class="font-headline text-[20px] font-semibold mb-2">Upcoming Milestone</h4>
+<p class="text-white/70 text-[14px] leading-relaxed mb-8">Leo is approaching 6 months. Expect to see signs of sitting unassisted and interest in solid foods soon.</p>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<div class="w-6 h-6 rounded-full overflow-hidden border border-white/20">
+<img alt="Milestone guide" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbO-lh4DK9Uz935Afw26Ue7MKGsVogq035NyaiPfM_dgbvhFQsxtjo9nD_xdm9eKWVA5XtDpyaFEdaijkHJ6PfifJnoxjWf_erXa2D3F35IKCIj12nVTCGiw0kQOroxvjQA3Hj2odW5s9B4-GFBHwA0lAAr-cycbR9WeJKJ6f6EEBvyxt4APPqU-VRVq5hd8DasTrhknmq1KPZ1KtQtRBc8_eXNA73jn2zQGektTH1-ygmQI0i7zefRq9991UqpWFzcCsV_kfWvwi8">
+</div>
+<span class="text-[12px] text-white/80">6-month prep guide</span>
+</div>
+<button class="w-full py-3 bg-white text-charcoal-primary rounded-lg font-bold hover:bg-white/90 active:scale-95 transition-all text-[14px] shadow-sm">Read 6-Month Guide</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-[#f7f4ed] border-t border-[#eceae4] flex items-center px-4 pb-6 pt-3 font-['Manrope'] justify-between"><a class="flex flex-col items-center justify-center text-[#1c1c1c] gap-1" href="#"><span class="material-symbols-outlined">dashboard</span><span class="text-[11px] font-bold tracking-tight">Dashboard</span></a><a class="flex flex-col items-center justify-center text-[#1c1c1c]/40 hover:text-[#1c1c1c] transition-colors gap-1" href="#"><span class="material-symbols-outlined">description</span><span class="text-[11px] font-medium tracking-tight">Records</span></a><a class="flex flex-col items-center justify-center text-[#1c1c1c]/40 hover:text-[#1c1c1c] transition-colors gap-1" href="#"><span class="material-symbols-outlined">smart_toy</span><span class="text-[11px] font-medium tracking-tight">Ask</span></a><a class="flex flex-col items-center justify-center text-[#1c1c1c]/40 hover:text-[#1c1c1c] transition-colors gap-1" href="#"><span class="material-symbols-outlined">trending_up</span><span class="text-[11px] font-medium tracking-tight">Growth</span></a></nav>
+
+
+</body></html>
