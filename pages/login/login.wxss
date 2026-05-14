@@ -12,7 +12,7 @@
 }
 
 .eyebrow {
-  color: var(--accent-strong);
+  color: var(--muted-foreground);
   font-size: 24rpx;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -69,7 +69,7 @@
   gap: 8rpx;
   border: 1rpx solid var(--border);
   border-radius: 28rpx;
-  background: var(--accent-muted);
+  background: var(--surface-muted);
   padding: 24rpx;
 }
 

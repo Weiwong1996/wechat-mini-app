@@ -1,6 +1,13 @@
 /**
  * One-off Stitch MCP JSON-RPC helper (local use; reads API key from .cursor/mcp.json).
  * JSON-RPC method: tools/call with params { name, arguments }
+ *
+ * Reuse an existing Stitch project:
+ * - Run once and read projectId (and designSystemId) from stitch-output.json
+ * - Set environment variable STITCH_REUSE_PROJECT_ID before running, then skip create_project
+ *   and pass the existing ids into generate_screen_from_text (edit the script accordingly).
+ *
+ * Documentation: docs/stitch_mcp.md
  */
 import fs from 'node:fs'
 

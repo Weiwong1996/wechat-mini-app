@@ -1,0 +1,168 @@
+<view class="page-root setup-root-page {{isDark ? 'theme-dark' : ''}}">
+  <view class="setup-topbar">
+    <view class="setup-top-row">
+      <text class="setup-close muted-text" bindtap="onTapBackStep">关闭</text>
+      <text class="setup-brand">Parently</text>
+      <view class="setup-top-spacer" />
+    </view>
+    <view class="setup-progress-wrap">
+      <view class="setup-progress-track">
+        <view class="setup-progress-fill setup-pf-{{step}}" />
+      </view>
+      <text class="setup-step-label muted-text">步骤 {{step}} / 3</text>
+    </view>
+  </view>
+
+  <scroll-view class="setup-scroll page-shell" scroll-y enhanced show-scrollbar="{{false}}">
+    <block wx:if="{{step === 1}}">
+      <view class="editorial-block">
+        <view class="editorial-title">基础信息</view>
+        <view class="editorial-lead muted-text">先记下宝宝的美好细节，可随时在设置里修改。</view>
+      </view>
+
+      <view class="photo-block">
+        <view class="photo-circle" bindtap="onTapPhoto" hover-class="tile-active">
+          <text class="photo-placeholder muted-text">照片</text>
+          <view class="photo-glass muted-text">📷</view>
+        </view>
+        <text class="photo-hint">上传宝宝照片</text>
+      </view>
+
+      <view class="field-block">
+        <text class="field-label muted-text">宝宝姓名</text>
+        <input
+          class="field-input"
+          placeholder="例如 Leo James"
+          value="{{babyName}}"
+          bindinput="onInputName"
+          placeholder-class="field-ph"
+        />
+      </view>
+
+      <view class="field-block">
+        <text class="field-label muted-text">性别</text>
+        <view class="gender-row">
+          <view
+            class="gender-pill {{gender === 'boy' ? 'gender-on' : ''}}"
+            data-g="boy"
+            bindtap="onPickGender"
+          >男孩</view>
+          <view
+            class="gender-pill {{gender === 'girl' ? 'gender-on' : ''}}"
+            data-g="girl"
+            bindtap="onPickGender"
+          >女孩</view>
+          <view
+            class="gender-pill {{gender === 'surprise' ? 'gender-on' : ''}}"
+            data-g="surprise"
+            bindtap="onPickGender"
+          >惊喜</view>
+        </view>
+      </view>
+    </block>
+
+    <block wx:elif="{{step === 2}}">
+      <view class="editorial-block">
+        <view class="editorial-title">出生细节</view>
+        <view class="editorial-lead muted-text">用于生长曲线与里程碑参考（演示表单，不写入云端）。</view>
+      </view>
+
+      <view class="field-block">
+        <text class="field-label muted-text">出生日期</text>
+        <picker mode="date" value="{{birthDate}}" bindchange="onPickDate">
+          <view class="field-picker field-input">{{birthDate}}</view>
+        </picker>
+      </view>
+
+      <view class="field-block">
+        <text class="field-label muted-text">出生时间</text>
+        <picker mode="time" value="{{birthTime}}" bindchange="onPickTime">
+          <view class="field-picker field-input">{{birthTime}}</view>
+        </picker>
+      </view>
+
+      <view class="field-block">
+        <text class="field-label muted-text">出生体重 (lb / oz)</text>
+        <view class="split-2">
+          <input
+            class="field-input"
+            type="digit"
+            placeholder="lb"
+            value="{{weightLb}}"
+            bindinput="onInputWeightLb"
+            placeholder-class="field-ph"
+          />
+          <input
+            class="field-input"
+            type="digit"
+            placeholder="oz"
+            value="{{weightOz}}"
+            bindinput="onInputWeightOz"
+            placeholder-class="field-ph"
+          />
+        </view>
+      </view>
+
+      <view class="field-block">
+        <text class="field-label muted-text">身长 (in)</text>
+        <input
+          class="field-input"
+          type="digit"
+          placeholder="英寸"
+          value="{{lengthIn}}"
+          bindinput="onInputLength"
+          placeholder-class="field-ph"
+        />
+      </view>
+    </block>
+
+    <block wx:else>
+      <view class="editorial-block">
+        <view class="editorial-title">确认档案</view>
+        <view class="editorial-lead muted-text">检查信息无误后，即可开始在 Parently 记录成长。</view>
+      </view>
+
+      <view class="review-grid">
+        <view class="review-card card">
+          <view class="review-ico muted-text">👶</view>
+          <view>
+            <text class="review-k muted-text">档案</text>
+            <view class="review-h">{{babyName || '未填写'}}</view>
+            <text class="review-sub muted-text">出生 {{birthDate}}</text>
+          </view>
+        </view>
+        <view class="review-card card">
+          <view class="review-ico muted-text">⚖️</view>
+          <view>
+            <text class="review-k muted-text">出生体征</text>
+            <view class="review-h">{{weightLb}} lb {{weightOz}} oz</view>
+            <text class="review-sub muted-text">身长 {{lengthIn}} in</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="toggle-card card">
+        <view class="toggle-row border-b">
+          <view class="toggle-text">
+            <view class="toggle-title">AI 生长解读</view>
+            <view class="toggle-desc muted-text">基于记录生成个性化提示（演示）</view>
+          </view>
+          <switch checked="{{aiTracking}}" color="{{isDark ? '#34d399' : '#1c1c1c'}}" bindchange="onToggleAi" />
+        </view>
+        <view class="toggle-row">
+          <view class="toggle-text">
+            <view class="toggle-title">伴侣共享</view>
+            <view class="toggle-desc muted-text">邀请另一位家长同步记录与提醒</view>
+          </view>
+          <switch checked="{{partnerSharing}}" color="{{isDark ? '#34d399' : '#1c1c1c'}}" bindchange="onTogglePartner" />
+        </view>
+      </view>
+    </block>
+
+    <view class="setup-actions">
+      <button class="ghost-secondary" bindtap="onTapBackStep">{{step === 1 ? '取消' : '上一步'}}</button>
+      <button wx:if="{{step < 3}}" class="accent-fill-button setup-next" bindtap="onTapNext">下一步</button>
+      <button wx:else class="accent-fill-button setup-next" bindtap="onTapDone">完成</button>
+    </view>
+  </scroll-view>
+</view>

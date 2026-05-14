@@ -6,11 +6,14 @@ const jsonFiles = [
   'app.json',
   'project.config.json',
   'sitemap.json',
+  'theme.json',
   'pages/login/login.json',
   'pages/index/index.json',
   'pages/record/record.json',
   'pages/ask/ask.json',
-  'pages/growth/growth.json'
+  'pages/growth/growth.json',
+  'pages/profile/profile.json',
+  'pages/baby-setup/baby-setup.json'
 ]
 
 const requiredFiles = [
@@ -19,8 +22,15 @@ const requiredFiles = [
   'app.wxss',
   'project.config.json',
   'sitemap.json',
+  'theme.json',
   'utils/config.js',
   'utils/auth.js',
+  'utils/theme.js',
+  'behaviors/theme.js',
+  'custom-tab-bar/index.js',
+  'custom-tab-bar/index.json',
+  'custom-tab-bar/index.wxml',
+  'custom-tab-bar/index.wxss',
   'pages/login/login.js',
   'pages/login/login.wxml',
   'pages/login/login.wxss',
@@ -40,7 +50,16 @@ const requiredFiles = [
   'pages/growth/growth.js',
   'pages/growth/growth.wxml',
   'pages/growth/growth.wxss',
-  'pages/growth/growth.json'
+  'pages/growth/growth.json',
+  'pages/profile/profile.js',
+  'pages/profile/profile.wxml',
+  'pages/profile/profile.wxss',
+  'pages/profile/profile.json',
+  'pages/baby-setup/baby-setup.js',
+  'pages/baby-setup/baby-setup.wxml',
+  'pages/baby-setup/baby-setup.wxss',
+  'pages/baby-setup/baby-setup.json',
+  'docs/stitch_mcp.md'
 ]
 
 test('miniprogram JSON files are valid', () => {
@@ -63,6 +82,8 @@ test('app.json registers expected pages', () => {
     'pages/index/index',
     'pages/record/record',
     'pages/ask/ask',
-    'pages/growth/growth'
+    'pages/growth/growth',
+    'pages/profile/profile',
+    'pages/baby-setup/baby-setup'
   ])
 })

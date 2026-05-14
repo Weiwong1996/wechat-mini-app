@@ -1,0 +1,188 @@
+<view class="page-root {{isDark ? 'theme-dark' : ''}}">
+  <scroll-view class="profile-scroll page-shell" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="profile-hero-card card">
+      <view class="profile-avatar-wrap">
+        <view class="profile-avatar-ring">
+          <view class="profile-avatar-inner muted-text">Leo</view>
+        </view>
+        <view class="profile-edit-fab" bindtap="onTapAvatar" hover-class="tile-active">✎</view>
+      </view>
+      <view class="profile-name-block">
+        <view class="ds-hero-title profile-name">{{babyName}}</view>
+        <view class="ds-body profile-phase muted-text">{{babySubtitle}}</view>
+      </view>
+      <view class="profile-tag-row">
+        <text wx:for="{{tags}}" wx:key="*this" class="profile-tag">{{item}}</text>
+      </view>
+    </view>
+
+    <view class="profile-section-kicker ds-label-caps">切换档案</view>
+    <scroll-view class="profile-switch-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="profile-switch-inner">
+        <view
+          wx:for="{{profiles}}"
+          wx:key="id"
+          class="profile-switch-item {{item.active ? 'profile-switch-on' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="onPickProfile"
+        >
+          <view class="profile-switch-avatar {{item.active ? 'profile-switch-ring' : ''}}">
+            <text class="profile-switch-letter">{{item.initial}}</text>
+          </view>
+          <text class="profile-switch-name">{{item.name}}</text>
+        </view>
+        <view class="profile-switch-item" bindtap="onTapAddProfile" hover-class="tile-active">
+          <view class="profile-switch-add">
+            <text class="profile-switch-plus">+</text>
+          </view>
+          <text class="profile-switch-name muted-text">新建</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="ds-section-heading profile-group-title">账户</view>
+    <view class="settings-group card">
+      <view class="settings-row border-b" bindtap="onTapRow" hover-class="tile-active">
+        <view class="settings-left">
+          <text class="settings-ico muted-text">👤</text>
+          <text class="settings-label">个人信息</text>
+        </view>
+        <text class="settings-chev muted-text">›</text>
+      </view>
+      <view class="settings-row border-b" bindtap="onTapRow" hover-class="tile-active">
+        <view class="settings-left">
+          <text class="settings-ico muted-text">✉️</text>
+          <text class="settings-label">邮件与通知</text>
+        </view>
+        <text class="settings-chev muted-text">›</text>
+      </view>
+      <view class="settings-row" bindtap="onTapRow" hover-class="tile-active">
+        <view class="settings-left">
+          <text class="settings-ico muted-text">💳</text>
+          <text class="settings-label">订阅与账单</text>
+        </view>
+        <view class="settings-right-meta">
+          <text class="settings-pill">Pro</text>
+          <text class="settings-chev muted-text">›</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="ds-section-heading profile-group-title">共享访问</view>
+    <view class="settings-group card">
+      <view class="settings-row border-b" bindtap="onTapRow" hover-class="tile-active">
+        <view class="settings-left">
+          <text class="settings-ico muted-text">👨‍👩‍👧</text>
+          <text class="settings-label">照护者权限</text>
+        </view>
+        <view class="settings-right-meta">
+          <view class="care-stack muted-text">
+            <view class="care-dot" />
+            <view class="care-plus">+1</view>
+          </view>
+          <text class="settings-chev muted-text">›</text>
+        </view>
+      </view>
+      <view class="settings-row" bindtap="onTapRow" hover-class="tile-active">
+        <view class="settings-left">
+          <text class="settings-ico muted-text">🏥</text>
+          <text class="settings-label">儿保数据同步</text>
+        </view>
+        <text class="settings-chev muted-text">›</text>
+      </view>
+    </view>
+
+    <view class="ds-section-heading profile-group-title">智能与记忆</view>
+    <view class="settings-group card">
+      <view class="settings-row settings-row-tall border-b">
+        <view class="settings-left settings-col">
+          <text class="settings-ico muted-text">✨</text>
+          <view>
+            <view class="settings-label">里程碑预测</view>
+            <view class="settings-desc muted-text">结合记录预测发育跳跃窗口（演示）</view>
+          </view>
+        </view>
+        <switch checked="{{aiMilestone}}" color="{{isDark ? '#34d399' : '#1c1c1c'}}" bindchange="onToggleAiMilestone" />
+      </view>
+      <view class="settings-row settings-row-tall border-b">
+        <view class="settings-left settings-col">
+          <text class="settings-ico muted-text">📝</text>
+          <view>
+            <view class="settings-label">上下文记忆</view>
+            <view class="settings-desc muted-text">记住过往不适与喂养偏好（演示）</view>
+          </view>
+        </view>
+        <switch checked="{{contextualMemory}}" color="{{isDark ? '#34d399' : '#1c1c1c'}}" bindchange="onToggleMemory" />
+      </view>
+      <view class="settings-row" bindtap="onTapRow" hover-class="tile-active">
+        <view class="settings-left">
+          <text class="settings-ico muted-text">🗄️</text>
+          <text class="settings-label">隐私与导出</text>
+        </view>
+        <text class="settings-chev muted-text">›</text>
+      </view>
+    </view>
+
+    <view class="ds-section-heading profile-group-title">应用</view>
+    <view class="settings-group card">
+      <view class="settings-row border-b" bindtap="onTapRow" hover-class="tile-active">
+        <view class="settings-left">
+          <text class="settings-ico muted-text">⚙️</text>
+          <text class="settings-label">通用设置</text>
+        </view>
+        <text class="settings-chev muted-text">›</text>
+      </view>
+      <view class="settings-row" bindtap="onTapRow" hover-class="tile-active">
+        <view class="settings-left">
+          <text class="settings-ico muted-text">❓</text>
+          <text class="settings-label">帮助与常见问题</text>
+        </view>
+        <text class="settings-chev muted-text">›</text>
+      </view>
+    </view>
+
+    <view class="ds-section-heading profile-group-title">显示与外观</view>
+    <view class="card theme-card">
+      <view class="theme-options">
+        <view
+          class="theme-opt {{themePref === 'system' ? 'theme-opt-on' : ''}}"
+          data-value="system"
+          bindtap="onSelectTheme"
+        >
+          <text class="theme-opt-label">跟随系统</text>
+          <text class="theme-opt-hint muted-text">随系统深浅色变化</text>
+        </view>
+        <view
+          class="theme-opt {{themePref === 'light' ? 'theme-opt-on' : ''}}"
+          data-value="light"
+          bindtap="onSelectTheme"
+        >
+          <text class="theme-opt-label">浅色</text>
+          <text class="theme-opt-hint muted-text">温暖羊皮纸画布</text>
+        </view>
+        <view
+          class="theme-opt {{themePref === 'dark' ? 'theme-opt-on' : ''}}"
+          data-value="dark"
+          bindtap="onSelectTheme"
+        >
+          <text class="theme-opt-label">深色</text>
+          <text class="theme-opt-hint muted-text">夜间阅读更柔和</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card link-card" bindtap="onTapBabySetup" hover-class="tile-active">
+      <view class="link-row">
+        <view class="link-text">
+          <view class="link-title">新建宝宝档案</view>
+          <view class="link-desc muted-text">与引导流程对齐 · 静态演示</view>
+        </view>
+        <text class="link-chevron muted-text">›</text>
+      </view>
+    </view>
+
+    <button class="sign-out-btn" bindtap="onTapSignOut">退出所有设备的登录</button>
+
+    <button class="ghost-dismiss" bindtap="onTapBack">完成</button>
+  </scroll-view>
+</view>

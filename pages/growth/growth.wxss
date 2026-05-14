@@ -1,185 +1,332 @@
 .growth-page {
+  min-height: 100vh;
+}
+
+.growth-scroll {
+  flex: 1;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 28rpx 28rpx 200rpx;
+}
+
+.growth-hero {
+  margin-bottom: 40rpx;
+}
+
+.growth-title {
+  margin-bottom: 12rpx;
+}
+
+.growth-lead {
+  max-width: 620rpx;
+}
+
+/* Bento：纵向叠放（手机），与设计 parchment 卡片一致 */
+.bento-stack {
   display: flex;
   flex-direction: column;
-  gap: 28rpx;
+  gap: 24rpx;
+  margin-bottom: 32rpx;
 }
 
-.screen-intro {
+.bento-card {
+  padding: 40rpx 36rpx;
+  border-radius: 32rpx;
+  border: 1rpx solid var(--border-subtle, var(--border));
+  background: var(--card);
   display: flex;
   flex-direction: column;
-  gap: 10rpx;
+  gap: 8rpx;
 }
 
-.screen-kicker {
-  font-size: 22rpx;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+.bento-label {
+  opacity: 0.65;
+  margin-bottom: 4rpx;
 }
 
-.screen-title {
-  font-size: 48rpx;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--foreground);
-}
-
-.screen-desc {
-  font-size: 26rpx;
-  line-height: 1.55;
-}
-
-.chip-strip {
+.bento-main-row {
   display: flex;
-  flex-wrap: wrap;
+  align-items: baseline;
   gap: 12rpx;
 }
 
-.chip {
-  padding: 12rpx 22rpx;
-  border-radius: 999rpx;
-  font-size: 24rpx;
+.bento-val {
+  font-size: 84rpx;
   font-weight: 700;
-}
-
-.chip-active {
-  background: linear-gradient(135deg, var(--accent) 0%, #14b8a6 100%);
-  color: #ffffff;
-}
-
-.chip-quiet {
-  background: rgba(255, 255, 255, 0.65);
-  border: 1rpx solid var(--border);
-}
-
-.chart-card {
-  padding: 28rpx 26rpx 32rpx;
-  border-radius: 40rpx;
-}
-
-.chart-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 20rpx;
-}
-
-.chart-title {
-  font-size: 30rpx;
-  font-weight: 800;
-}
-
-.chart-hint {
-  font-size: 22rpx;
-}
-
-.fake-chart {
-  position: relative;
-  height: 260rpx;
-  border-radius: 28rpx;
-  background: linear-gradient(180deg, rgba(204, 251, 241, 0.55) 0%, rgba(255, 255, 255, 0.92) 100%);
-  border: 1rpx solid var(--border);
-  overflow: hidden;
-}
-
-.fake-grid {
-  position: absolute;
-  inset: 24rpx;
-  background-image:
-    linear-gradient(0deg, rgba(148, 163, 184, 0.18) 1rpx, transparent 1rpx),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.14) 1rpx, transparent 1rpx);
-  background-size: 100% 52rpx, 56rpx 100%;
-  opacity: 0.55;
-}
-
-.fake-line {
-  position: absolute;
-  left: 48rpx;
-  right: 40rpx;
-  top: 58%;
-  height: 6rpx;
-  border-radius: 999rpx;
-  background: linear-gradient(90deg, var(--accent), #5eead4, var(--accent-strong));
-  transform: rotate(-8deg);
-  transform-origin: left center;
-  opacity: 0.95;
-}
-
-.fake-dot {
-  position: absolute;
-  width: 18rpx;
-  height: 18rpx;
-  border-radius: 999rpx;
-  background: #ffffff;
-  border: 4rpx solid var(--accent-strong);
-  box-shadow: 0 4rpx 12rpx rgba(13, 148, 136, 0.35);
-}
-
-.fake-dot.d1 {
-  left: 17%;
-  top: 62%;
-}
-
-.fake-dot.d2 {
-  left: 38%;
-  top: 48%;
-}
-
-.fake-dot.d3 {
-  left: 58%;
-  top: 52%;
-}
-
-.fake-dot.d4 {
-  left: 80%;
-  top: 38%;
-}
-
-.metric-card {
-  padding: 12rpx 0;
-  border-radius: 40rpx;
-}
-
-.metric-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12rpx 20rpx;
-  padding: 26rpx 28rpx;
-  border-bottom: 1rpx solid var(--border);
-}
-
-.metric-row:last-child {
-  border-bottom: none;
-}
-
-.metric-left {
-  display: flex;
-  align-items: center;
-  gap: 14rpx;
-  flex: 0 0 auto;
-}
-
-.metric-dot {
-  width: 14rpx;
-  height: 14rpx;
-  border-radius: 999rpx;
-  background: var(--accent);
-}
-
-.metric-name {
-  font-size: 30rpx;
-  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
   color: var(--foreground);
 }
 
-.metric-value {
-  margin-left: auto;
-  font-size: 34rpx;
-  font-weight: 800;
-  color: var(--accent-strong);
+.bento-unit {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: var(--muted-foreground);
 }
 
-.metric-hint {
-  flex-basis: 100%;
+.bento-delta {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  margin-top: 8rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #047857;
+}
+
+.theme-dark .bento-delta {
+  color: #34d399;
+}
+
+.bento-arrow {
+  font-size: 28rpx;
+}
+
+.bento-sub {
+  margin-top: 4rpx;
+  font-size: 28rpx;
+}
+
+/* 主图表区块 */
+.chart-section {
+  padding: 40rpx 32rpx 36rpx;
+  border-radius: 48rpx;
+  margin-bottom: 32rpx;
+}
+
+.chart-head-row {
+  margin-bottom: 36rpx;
+}
+
+.chart-h1 {
+  margin-bottom: 8rpx;
+}
+
+.chart-sub {
+  font-size: 26rpx;
+}
+
+/* 分段控件：secondary-container 浅色底 */
+.segment {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  padding: 8rpx;
+  margin-bottom: 28rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid var(--border-subtle, var(--border));
+  background: rgba(229, 226, 219, 0.45);
+}
+
+.theme-dark .segment {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.segment-pill {
+  flex: 1;
+  min-width: 140rpx;
+  text-align: center;
+  padding: 16rpx 24rpx;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--muted-foreground);
+}
+
+.segment-on {
+  background: var(--accent);
+  color: var(--primary-foreground);
+  box-shadow: var(--inset-highlight, 0 2rpx 8rpx rgba(0, 0, 0, 0.06));
+}
+
+/* WHO 图表区 */
+.who-chart {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin-top: 8rpx;
+}
+
+.who-y {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 16rpx;
+  margin-right: 12rpx;
+  border-right: 1rpx solid var(--border-subtle, var(--border));
+  min-height: 360rpx;
+}
+
+.who-y-label {
   font-size: 22rpx;
+  font-weight: 700;
+  color: var(--muted-foreground);
+  opacity: 0.45;
+  line-height: 1.2;
+}
+
+.who-mid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.who-canvas {
+  width: 100%;
+  height: 360rpx;
+  display: block;
+}
+
+.who-x {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 16rpx;
+  margin-top: 8rpx;
+  border-top: 1rpx solid var(--border-subtle, var(--border));
+}
+
+.who-x-label {
+  font-size: 22rpx;
+  font-weight: 700;
+  color: var(--muted-foreground);
+  opacity: 0.45;
+}
+
+/* 儿保洞察 */
+.insight-card {
+  padding: 48rpx 40rpx;
+  border-radius: 48rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 8rpx 48rpx rgba(0, 0, 0, 0.02);
+}
+
+.insight-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 28rpx;
+  margin-bottom: 32rpx;
+}
+
+.insight-icon {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 28rpx;
+  background: var(--secondary-container, #e5e2db);
+  border: 1rpx solid var(--border-subtle, var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52rpx;
+  flex-shrink: 0;
+}
+
+.insight-date {
+  font-size: 26rpx;
+  margin-top: 6rpx;
+}
+
+.insight-body {
+  margin-bottom: 36rpx;
+  line-height: 1.65;
+  opacity: 0.92;
+}
+
+.insight-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.insight-btn {
+  flex: 1;
+  min-width: 240rpx;
+}
+
+.ghost-btn {
+  margin: 0;
+  padding: 0 40rpx;
+  min-height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 28rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  border: 1rpx solid var(--border-interactive, var(--border));
+  background: transparent;
+  color: var(--foreground);
+}
+
+.ghost-btn::after {
+  border: none;
+}
+
+/* 最近记录 */
+.recent-card {
+  padding: 48rpx 40rpx;
+  border-radius: 48rpx;
+}
+
+.recent-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36rpx;
+}
+
+.recent-link {
+  font-size: 28rpx;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 8rpx;
+}
+
+.recent-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid var(--border-subtle, var(--border));
+}
+
+.recent-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.recent-left {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  min-width: 0;
+}
+
+.recent-ico {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 20rpx;
+  background: var(--card);
+  border: 1rpx solid var(--border-subtle, var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  flex-shrink: 0;
+}
+
+.recent-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.recent-time {
+  font-size: 24rpx;
+  margin-top: 6rpx;
+}
+
+.recent-val {
+  font-size: 30rpx;
+  flex-shrink: 0;
 }

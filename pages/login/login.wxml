@@ -1,42 +1,40 @@
-<view class="page-shell login-page">
-  <view class="login-hero">
-    <view class="eyebrow">Supabase Auth</view>
-    <view class="title">使用微信登录</view>
-    <view class="description muted-text">
-      通过微信官方登录能力获取一次性 code，并由 Supabase Edge Function 完成安全认证。
-    </view>
-  </view>
-
-  <view class="card login-card">
-    <view class="card-header">
-      <view class="card-title">欢迎回来</view>
-      <view class="card-description muted-text">
-        使用微信身份登录以继续访问小程序。
+<view class="page-root {{isDark ? 'theme-dark' : ''}}">
+  <view class="page-shell login-page">
+    <view class="login-hero">
+      <view class="eyebrow ds-label-caps">Parently</view>
+      <view class="title">欢迎回来</view>
+      <view class="description muted-text">
+        用熟悉的微信一键登录，在羊皮纸般的温柔界面里继续记录宝宝的日常与成长。
       </view>
     </view>
 
-    <view class="card-content">
-      <view class="notice">
-        <view class="notice-title">登录说明</view>
-        <view class="notice-text muted-text">
-          小程序端只会提交微信临时登录凭证 code，不会接收或保存微信 session_key。
+    <view class="card login-card">
+      <view class="card-header">
+        <view class="card-title">开始记录</view>
+        <view class="card-description muted-text">
+          登录后可在工作台查看摘要、录入成长瞬间，并向育儿助手提问。
         </view>
       </view>
 
-      <view wx:if="{{errorMessage}}" class="error-message">
-        {{errorMessage}}
-      </view>
-    </view>
+      <view class="card-content">
+        <view class="notice">
+          <view class="notice-title">隐私说明</view>
+          <view class="notice-text muted-text">
+            小程序仅向服务端提交一次性登录凭证，用于换取你的账号会话；不会在本地保存敏感票据。
+          </view>
+        </view>
 
-    <view class="card-footer">
-      <button
-        class="accent-fill-button login-button"
-        loading="{{isLoggingIn}}"
-        disabled="{{isLoggingIn}}"
-        bindtap="onTapLogin"
-      >
-        {{isLoggingIn ? '登录中...' : '微信一键登录'}}
-      </button>
+        <view wx:if="{{errorMessage}}" class="error-message">{{errorMessage}}</view>
+      </view>
+
+      <view class="card-footer">
+        <button
+          class="accent-fill-button login-button"
+          loading="{{isLoggingIn}}"
+          disabled="{{isLoggingIn}}"
+          bindtap="onTapLogin"
+        >{{isLoggingIn ? '登录中...' : '微信一键登录'}}</button>
+      </view>
     </view>
   </view>
 </view>

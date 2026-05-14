@@ -1,16 +1,19 @@
 const { getStoredSession, loginWithWeChat } = require('../../utils/auth')
 
 Page({
+  behaviors: [require('../../behaviors/theme')],
+
   data: {
     isLoggingIn: false,
     errorMessage: ''
   },
 
   onShow() {
+    this.syncTheme()
     const session = getStoredSession()
 
     if (session) {
-      wx.redirectTo({
+      wx.switchTab({
         url: '/pages/index/index'
       })
     }
@@ -36,7 +39,7 @@ Page({
         icon: 'success'
       })
 
-      wx.redirectTo({
+      wx.switchTab({
         url: '/pages/index/index'
       })
     } catch (error) {
