@@ -1,52 +1,64 @@
 .record-page {
   display: flex;
   flex-direction: column;
+  gap: 28rpx;
 }
 
-.record-card {
+.screen-intro {
   display: flex;
   flex-direction: column;
-  gap: 20rpx;
-  padding: 32rpx;
+  gap: 10rpx;
 }
 
-.section-title {
-  font-size: 34rpx;
-  font-weight: 700;
+.screen-kicker {
+  font-size: 22rpx;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.screen-title {
+  font-size: 48rpx;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--foreground);
 }
 
-.section-hint {
+.screen-desc {
   font-size: 26rpx;
   line-height: 1.55;
+  max-width: 620rpx;
+}
+
+.record-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  padding: 32rpx 28rpx 36rpx;
+  border-radius: 40rpx;
+}
+
+.sheet-label {
+  font-size: 24rpx;
+  font-weight: 700;
 }
 
 .record-textarea {
   width: 100%;
-  min-height: 280rpx;
+  min-height: 320rpx;
   box-sizing: border-box;
-  padding: 24rpx;
-  border-radius: 20rpx;
-  border: 1rpx solid var(--border);
-  background: var(--muted);
+  padding: 28rpx;
+  border-radius: 28rpx;
+  border: 2rpx solid rgba(13, 148, 136, 0.22);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fffe 100%);
   font-size: 28rpx;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--foreground);
 }
 
-.submit-button {
-  margin-top: 12rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 96rpx;
-  border-radius: 24rpx;
-  background: var(--accent);
-  color: #ffffff;
-  font-size: 32rpx;
-  font-weight: 700;
+.record-ph {
+  color: #94a3b8;
 }
 
-.submit-button::after {
-  border: none;
+.submit-btn {
+  margin-top: 8rpx;
 }

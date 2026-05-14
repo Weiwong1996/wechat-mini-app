@@ -1,15 +1,21 @@
 <view class="page-shell record-page">
-  <view class="card record-card">
-    <view class="section-title">自然语言记录</view>
-    <view class="section-hint muted-text">例如：宝宝今天身高 72cm，体重 9.5kg，第一次翻身。</view>
+  <view class="screen-intro">
+    <view class="screen-kicker muted-text">STEP 01</view>
+    <view class="screen-title">录入</view>
+    <view class="screen-desc muted-text">用自然语言写下今天的成长片段，便于后续检索与问答。</view>
+  </view>
+
+  <view class="card record-sheet">
+    <view class="sheet-label muted-text">今日记录</view>
     <textarea
       class="record-textarea"
-      placeholder="在此输入或粘贴内容…"
+      placeholder="例如：宝宝今天身高 72cm，体重 9.5kg，第一次翻身。"
       maxlength="2000"
       value="{{body}}"
       bindinput="onInputBody"
       show-confirm-bar="{{false}}"
+      placeholder-class="record-ph"
     />
-    <button class="submit-button" bindtap="onTapSubmit">提交</button>
+    <button class="accent-fill-button submit-btn" bindtap="onTapSubmit">提交</button>
   </view>
 </view>

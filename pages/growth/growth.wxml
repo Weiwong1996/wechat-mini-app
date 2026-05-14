@@ -1,17 +1,37 @@
 <view class="page-shell growth-page">
-  <view class="muted-text growth-note">{{note}}</view>
+  <view class="screen-intro">
+    <view class="screen-kicker muted-text">STEP 03</view>
+    <view class="screen-title">成长曲线</view>
+    <view class="screen-desc muted-text">{{note}}</view>
+  </view>
 
-  <view class="card growth-card">
-    <view class="chart-placeholder">
-      <view class="chart-line" />
-      <view class="chart-line muted" />
-      <view class="chart-caption muted-text">趋势线占位（未接入真实图表）</view>
+  <view class="chip-strip">
+    <view class="chip chip-active">静态演示</view>
+    <view class="chip chip-quiet muted-text">本月</view>
+    <view class="chip chip-quiet muted-text">本年</view>
+  </view>
+
+  <view class="card chart-card">
+    <view class="chart-head">
+      <view class="chart-title">生长趋势</view>
+      <view class="chart-hint muted-text">占位曲线 · 未接图表库</view>
+    </view>
+    <view class="fake-chart">
+      <view class="fake-grid" />
+      <view class="fake-line" />
+      <view class="fake-dot d1" />
+      <view class="fake-dot d2" />
+      <view class="fake-dot d3" />
+      <view class="fake-dot d4" />
     </view>
   </view>
 
   <view class="card metric-card">
     <view wx:for="{{metrics}}" wx:key="name" class="metric-row">
-      <view class="metric-name">{{item.name}}</view>
+      <view class="metric-left">
+        <view class="metric-dot" />
+        <view class="metric-name">{{item.name}}</view>
+      </view>
       <view class="metric-value">{{item.value}}</view>
       <view class="metric-hint muted-text">{{item.hint}}</view>
     </view>

@@ -1,74 +1,98 @@
 .ask-page {
   display: flex;
   flex-direction: column;
+  gap: 28rpx;
 }
 
-.ask-card {
+.screen-intro {
   display: flex;
   flex-direction: column;
-  gap: 20rpx;
-  padding: 32rpx;
+  gap: 10rpx;
 }
 
-.input-row {
+.screen-kicker {
+  font-size: 22rpx;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.screen-title {
+  font-size: 48rpx;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+}
+
+.screen-desc {
+  font-size: 26rpx;
+  line-height: 1.55;
+}
+
+.composer {
   display: flex;
+  align-items: stretch;
   gap: 16rpx;
-  align-items: center;
+  padding: 14rpx 14rpx 14rpx 22rpx;
+  border-radius: 999rpx;
 }
 
-.ask-input {
+.composer-input {
   flex: 1;
-  min-height: 88rpx;
-  padding: 0 24rpx;
-  border-radius: 20rpx;
-  border: 1rpx solid var(--border);
-  background: var(--muted);
+  min-height: 80rpx;
+  padding: 0 12rpx;
   font-size: 28rpx;
   box-sizing: border-box;
 }
 
-.send-button {
+.composer-ph {
+  color: #94a3b8;
+}
+
+.composer-send {
   flex-shrink: 0;
-  min-width: 140rpx;
-  min-height: 88rpx;
-  padding: 0 20rpx;
-  border-radius: 20rpx;
-  background: var(--accent);
-  color: #fff;
-  font-size: 28rpx;
+  min-width: 148rpx;
+  min-height: 80rpx !important;
+  border-radius: 999rpx !important;
+  font-size: 28rpx !important;
+}
+
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+}
+
+.chat-label {
+  font-size: 24rpx;
   font-weight: 700;
 }
 
-.send-button::after {
-  border: none;
-}
-
-.block-title {
-  font-size: 24rpx;
-  font-weight: 600;
-  margin-top: 8rpx;
-}
-
-.answer-block {
-  padding: 24rpx;
-  border-radius: 20rpx;
-  background: var(--accent-soft);
-  border: 1rpx solid var(--border);
+.bubble {
+  padding: 26rpx 28rpx;
+  border-radius: 28rpx;
   font-size: 28rpx;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
-.citation-list {
+.bubble-assist {
+  background: #ffffff;
+  border: 1rpx solid var(--border);
+  box-shadow: 0 12rpx 40rpx rgba(15, 118, 110, 0.09);
+  border-left: 8rpx solid var(--accent);
+}
+
+.pill-row {
   display: flex;
   flex-direction: column;
-  gap: 12rpx;
+  gap: 14rpx;
 }
 
-.citation-item {
-  padding: 20rpx 22rpx;
-  border-radius: 18rpx;
-  border: 1rpx dashed var(--border);
-  font-size: 26rpx;
-  line-height: 1.5;
+.pill {
+  padding: 18rpx 22rpx;
+  border-radius: 999rpx;
+  background: var(--accent-muted);
+  border: 1rpx solid var(--border);
+  font-size: 24rpx;
+  line-height: 1.45;
   color: var(--muted-foreground);
 }

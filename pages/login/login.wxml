@@ -30,7 +30,7 @@
 
     <view class="card-footer">
       <button
-        class="primary-button login-button"
+        class="accent-fill-button login-button"
         loading="{{isLoggingIn}}"
         disabled="{{isLoggingIn}}"
         bindtap="onTapLogin"

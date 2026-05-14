@@ -1,23 +1,32 @@
 <view class="page-shell ask-page">
-  <view class="card ask-card">
-    <view class="input-row">
-      <input
-        class="ask-input"
-        placeholder="输入你想问的问题…"
-        value="{{question}}"
-        bindinput="onInputQuestion"
-        confirm-type="send"
-        bindconfirm="onTapSend"
-      />
-      <button class="send-button" bindtap="onTapSend">发送</button>
-    </view>
+  <view class="screen-intro">
+    <view class="screen-kicker muted-text">STEP 02</view>
+    <view class="screen-title">问答</view>
+    <view class="screen-desc muted-text">提问后将在下方展示示例回答与引用（静态占位）。</view>
+  </view>
 
-    <view class="block-title muted-text">回答</view>
-    <view class="answer-block">{{answer}}</view>
+  <view class="composer card">
+    <input
+      class="composer-input"
+      placeholder="输入你想问的问题…"
+      value="{{question}}"
+      bindinput="onInputQuestion"
+      confirm-type="send"
+      bindconfirm="onTapSend"
+      placeholder-class="composer-ph"
+    />
+    <button class="composer-send accent-fill-button" bindtap="onTapSend">发送</button>
+  </view>
 
-    <view class="block-title muted-text">引用</view>
-    <view class="citation-list">
-      <view class="citation-item" wx:for="{{citations}}" wx:key="*this">{{item}}</view>
+  <view class="chat-section">
+    <view class="chat-label muted-text">助手回答</view>
+    <view class="bubble bubble-assist">{{answer}}</view>
+  </view>
+
+  <view class="chat-section">
+    <view class="chat-label muted-text">引用片段</view>
+    <view class="pill-row">
+      <view class="pill" wx:for="{{citations}}" wx:key="*this">{{item}}</view>
     </view>
   </view>
 </view>
