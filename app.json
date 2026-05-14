@@ -4,14 +4,31 @@
     "pages/index/index",
     "pages/record/record",
     "pages/ask/ask",
-    "pages/growth/growth"
+    "pages/growth/growth",
+    "pages/profile/profile",
+    "pages/baby-setup/baby-setup"
   ],
   "window": {
-    "navigationBarTitleText": "Supabase 微信登录",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "育儿助手",
+    "navigationBarBackgroundColor": "#f7f4ed",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#f8fafc"
+    "backgroundColor": "#f7f4ed"
   },
   "style": "v2",
+  "darkmode": true,
+  "themeLocation": "theme.json",
+  "tabBar": {
+    "custom": true,
+    "color": "#8a8a8a",
+    "selectedColor": "#1c1c1c",
+    "backgroundColor": "#f7f4ed",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "工作台" },
+      { "pagePath": "pages/record/record", "text": "记录" },
+      { "pagePath": "pages/ask/ask", "text": "问答" },
+      { "pagePath": "pages/growth/growth", "text": "成长" }
+    ]
+  },
   "sitemapLocation": "sitemap.json"
 }
