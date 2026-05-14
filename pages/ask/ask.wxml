@@ -45,39 +45,41 @@
           </view>
         </view>
       </view>
+
+      <view class="chat-scroll-pad" />
+    </scroll-view>
+  </view>
+
+  <view class="ask-footer">
+    <scroll-view class="pill-scroll" scroll-x show-scrollbar="{{false}}" enable-flex>
+      <view class="pill-strip">
+        <view
+          class="quick-pill"
+          wx:for="{{quickPills}}"
+          wx:key="key"
+          data-key="{{item.key}}"
+          bindtap="onTapQuickPill"
+        >
+          <text class="quick-pill-ico">{{item.icon}}</text>
+          <text>{{item.label}}</text>
+        </view>
+      </view>
     </scroll-view>
 
-    <view class="ask-footer">
-      <scroll-view class="pill-scroll" scroll-x show-scrollbar="{{false}}" enable-flex>
-        <view class="pill-strip">
-          <view
-            class="quick-pill"
-            wx:for="{{quickPills}}"
-            wx:key="key"
-            data-key="{{item.key}}"
-            bindtap="onTapQuickPill"
-          >
-            <text class="quick-pill-ico">{{item.icon}}</text>
-            <text>{{item.label}}</text>
-          </view>
-        </view>
-      </scroll-view>
-
-      <view class="input-row">
-        <view class="input-wrap">
-          <input
-            class="composer-input-field"
-            placeholder="问问睡眠、喂养或发展里程碑…"
-            value="{{question}}"
-            bindinput="onInputQuestion"
-            confirm-type="send"
-            bindconfirm="onTapSend"
-            placeholder-class="input-ph"
-          />
-          <view class="input-mic" bindtap="onTapMic" hover-class="input-mic-hover">🎤</view>
-        </view>
-        <button class="send-btn" bindtap="onTapSend" hover-class="send-btn-hover">发送</button>
+    <view class="input-row">
+      <view class="input-wrap">
+        <input
+          class="composer-input-field"
+          placeholder="问问睡眠、喂养或发展里程碑…"
+          value="{{question}}"
+          bindinput="onInputQuestion"
+          confirm-type="send"
+          bindconfirm="onTapSend"
+          placeholder-class="input-ph"
+        />
+        <view class="input-mic" bindtap="onTapMic" hover-class="input-mic-hover">🎤</view>
       </view>
+      <button class="send-btn" bindtap="onTapSend" hover-class="send-btn-hover">发送</button>
     </view>
   </view>
 </view>

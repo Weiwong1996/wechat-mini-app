@@ -1,4 +1,6 @@
-/* 输入区表面：浅色 / 深色显式加固，避免原生 input 脱离令牌 */
+/* 问答：对话区可滚动，底部输入区固定在自定义 tabBar 之上 */
+
+/* 输入区表面：浅色 / 深色显式加固 */
 .ask-page {
   --input-surface: #ffffff;
   --input-border: #eceae4;
@@ -38,7 +40,13 @@
   height: 0;
   min-height: 280rpx;
   box-sizing: border-box;
-  padding-bottom: 16rpx;
+  padding-bottom: 24rpx;
+}
+
+/* 为固定底栏留出滚动余量（快捷 pill + 输入行 + 安全区间隙） */
+.chat-scroll-pad {
+  height: 280rpx;
+  flex-shrink: 0;
 }
 
 .chat-hint {
@@ -175,14 +183,17 @@
   text-align: left;
 }
 
-/* 底部固定区：贴安全区之上，由 page-shell.has-tab 避让 TabBar */
+/* 底部固定：贴在自定义 tabBar 之上（高度可按真机微调） */
 .ask-footer {
-  flex-shrink: 0;
-  margin-left: -28rpx;
-  margin-right: -28rpx;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(108rpx + env(safe-area-inset-bottom));
+  z-index: 900;
   padding: 20rpx 28rpx 16rpx;
   border-top: 1rpx solid var(--border);
   background: var(--footer-bg);
+  box-sizing: border-box;
 }
 
 .pill-scroll {
@@ -222,8 +233,8 @@
 .input-row {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
-  gap: 14rpx;
+  align-items: center;
+  gap: 12rpx;
 }
 
 .input-wrap {
@@ -234,8 +245,8 @@
 
 .composer-input-field {
   width: 100%;
-  min-height: 96rpx;
-  padding: 22rpx 88rpx 22rpx 28rpx;
+  min-height: 72rpx;
+  padding: 18rpx 88rpx 18rpx 28rpx;
   box-sizing: border-box;
   border-radius: 24rpx;
   font-size: 28rpx;
@@ -254,12 +265,12 @@
   right: 12rpx;
   top: 50%;
   transform: translateY(-50%);
-  width: 72rpx;
-  height: 72rpx;
+  width: 64rpx;
+  height: 64rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32rpx;
+  font-size: 30rpx;
   border-radius: 999rpx;
   color: var(--muted-foreground);
 }
@@ -268,16 +279,18 @@
   opacity: 0.75;
 }
 
+/* 紧凑发送按钮 */
 .send-btn {
-  width: 112rpx;
-  min-height: 96rpx;
-  padding: 0;
-  line-height: 96rpx;
+  min-width: 100rpx;
+  width: auto;
+  min-height: 64rpx;
+  padding: 0 24rpx;
+  line-height: 64rpx;
   border-radius: 24rpx;
   border: none;
   background: var(--accent);
   color: var(--primary-foreground);
-  font-size: 28rpx;
+  font-size: 26rpx;
   font-weight: 700;
   box-shadow: var(--inset-highlight);
   flex-shrink: 0;
