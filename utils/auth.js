@@ -3,7 +3,8 @@ const { EDGE_FUNCTION_URL, SUPABASE_ANON_KEY } = require('./config')
 const STORAGE_KEYS = {
   accessToken: 'supabase_access_token',
   refreshToken: 'supabase_refresh_token',
-  user: 'supabase_user'
+  user: 'supabase_user',
+  currentBabyId: 'current_baby_id',
 }
 
 function buildAuthHeaders() {
@@ -11,6 +12,15 @@ function buildAuthHeaders() {
     'Content-Type': 'application/json',
     apikey: SUPABASE_ANON_KEY,
     Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+  }
+}
+
+/** 业务表 PostgREST 请求：须同时带用户 JWT 与 anon apikey（RLS 依赖 auth.uid()） */
+function buildUserAuthHeaders(accessToken) {
+  return {
+    'Content-Type': 'application/json',
+    apikey: SUPABASE_ANON_KEY,
+    Authorization: `Bearer ${accessToken}`,
   }
 }
 
@@ -59,6 +69,33 @@ function saveSession(session, wxApi) {
   api.setStorageSync(STORAGE_KEYS.user, session.user)
 }
 
+function getCurrentBabyId(wxApi) {
+  const api = getWxApi(wxApi)
+  try {
+    const id = api.getStorageSync(STORAGE_KEYS.currentBabyId)
+    return id || null
+  } catch (error) {
+    return null
+  }
+}
+
+function setCurrentBabyId(babyId, wxApi) {
+  const api = getWxApi(wxApi)
+  if (!babyId) {
+    api.removeStorageSync(STORAGE_KEYS.currentBabyId)
+  } else {
+    api.setStorageSync(STORAGE_KEYS.currentBabyId, babyId)
+  }
+  try {
+    const app = getApp()
+    if (app && app.globalData) {
+      app.globalData.currentBabyId = babyId || null
+    }
+  } catch (e) {
+    /* ignore */
+  }
+}
+
 function getStoredSession(wxApi) {
   const api = getWxApi(wxApi)
 
@@ -85,6 +122,17 @@ function clearStoredSession(wxApi) {
   api.removeStorageSync(STORAGE_KEYS.accessToken)
   api.removeStorageSync(STORAGE_KEYS.refreshToken)
   api.removeStorageSync(STORAGE_KEYS.user)
+  api.removeStorageSync(STORAGE_KEYS.currentBabyId)
+  try {
+    const app = getApp()
+    if (app && app.globalData) {
+      app.globalData.session = null
+      app.globalData.user = null
+      app.globalData.currentBabyId = null
+    }
+  } catch (e) {
+    /* 冷启动等时机 getApp 可能未就绪 */
+  }
 }
 
 async function loginWithWeChat(options = {}) {
@@ -116,9 +164,12 @@ async function loginWithWeChat(options = {}) {
 module.exports = {
   STORAGE_KEYS,
   buildAuthHeaders,
+  buildUserAuthHeaders,
   clearStoredSession,
+  getCurrentBabyId,
+  setCurrentBabyId,
   getStoredSession,
   loginWithWeChat,
   normalizeSession,
-  saveSession
+  saveSession,
 }

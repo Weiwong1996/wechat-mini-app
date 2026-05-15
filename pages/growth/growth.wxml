@@ -3,8 +3,12 @@
     <view class="growth-hero">
       <view class="ds-page-title growth-title">生长曲线</view>
       <view class="ds-body-lg growth-lead muted-text">
-        跟踪宝宝前 6 个月发育，并与 WHO 标准曲线对照（静态演示）。
+        数据来自 Supabase growth_records；对照线为示意。
       </view>
+    </view>
+
+    <view wx:if="{{needBabySetup}}" class="card growth-banner" bindtap="onTapGoBabySetup">
+      <view class="ds-body">尚未创建宝宝档案，点此新建。</view>
     </view>
 
     <view class="bento-stack">

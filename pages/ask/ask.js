@@ -1,3 +1,18 @@
+const {
+  clearStoredSession,
+  getStoredSession,
+} = require('../../utils/auth')
+const { ensureCurrentBabyContext } = require('../../utils/babyContext')
+const { userGet } = require('../../utils/supabaseRest')
+const { titleForCat } = require('../../utils/recordUi')
+
+function shortTime(iso) {
+  if (!iso) return ''
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  return `${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${`0${d.getMinutes()}`.slice(-2)}`
+}
+
 Page({
   behaviors: [require('../../behaviors/theme')],
 
@@ -17,10 +32,57 @@ Page({
       { key: 'growth', icon: '📏', label: '生长曲线' },
       { key: 'plan', icon: '📅', label: '作息安排' },
     ],
+    refDocs: [],
   },
 
   onShow() {
     this.syncTheme()
+    this.loadRefDocs()
+  },
+
+  async loadRefDocs() {
+    const session = getStoredSession()
+    if (!session) {
+      return
+    }
+
+    try {
+      const { babies, currentBabyId } = await ensureCurrentBabyContext(
+        wx,
+        session.accessToken
+      )
+      if (!babies.length || !currentBabyId) {
+        this.setData({ refDocs: [] })
+        return
+      }
+
+      const rows = await userGet(
+        wx,
+        session.accessToken,
+        `documents?baby_id=eq.${currentBabyId}&select=id,title,body,recorded_at,record_type&order=recorded_at.desc&limit=5`
+      )
+      const list = Array.isArray(rows) ? rows : []
+      const refDocs = list.map((doc) => {
+        const rawTitle =
+          doc.title && String(doc.title).trim()
+            ? doc.title
+            : (doc.body && String(doc.body).trim().slice(0, 24)) ||
+              titleForCat(doc.record_type || 'note')
+        return {
+          id: doc.id,
+          title: rawTitle.length > 40 ? `${rawTitle.slice(0, 40)}…` : rawTitle,
+          meta: `${titleForCat(doc.record_type || 'note')} · ${shortTime(doc.recorded_at)}`,
+        }
+      })
+      this.setData({ refDocs })
+    } catch (err) {
+      if (err && err.statusCode === 401) {
+        clearStoredSession()
+        wx.reLaunch({ url: '/pages/login/login' })
+        return
+      }
+      this.setData({ refDocs: [] })
+    }
   },
 
   onInputQuestion(e) {
@@ -34,7 +96,7 @@ Page({
       return
     }
     this.setData({
-      answer: `（演示）关于「${q}」：可先观察 3～5 天作息与醒来后安抚方式，必要时咨询儿科或睡眠顾问。以下为通用参考要点。`,
+      answer: `（演示）关于「${q}」：可先观察 3～5 天作息与醒来后安抚方式，必要时咨询儿科或睡眠顾问。以下为通用参考要点。完整 RAG 问答将在 Agent 阶段接入。`,
       tips: [
         '记录入睡、醒来的时间点，找规律',
         '避免过度疲劳：按需拉长或缩短清醒间隔做试探',
@@ -42,7 +104,7 @@ Page({
         '白天充足日照与活动，夜晚保持昏暗安静',
       ],
     })
-    wx.showToast({ title: '已更新回复', icon: 'success' })
+    wx.showToast({ title: '已更新回复（占位）', icon: 'success' })
   },
 
   onTapMic() {

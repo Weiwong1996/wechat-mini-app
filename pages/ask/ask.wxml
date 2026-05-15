@@ -7,7 +7,15 @@
       show-scrollbar="{{false}}"
       enable-flex
     >
-      <view class="chat-hint muted-text">以下对话为界面演示；发送后将刷新助手回复占位内容。</view>
+      <view class="chat-hint muted-text">智能语义问答（向量检索 + LLM）为 Agent 末阶段；下列「近期记录」来自 Supabase。</view>
+
+      <view wx:if="{{refDocs.length}}" class="ref-card card">
+        <view class="ds-label-caps">近期记录参考</view>
+        <view wx:for="{{refDocs}}" wx:key="id" class="ref-line muted-text">
+          <text class="ref-ttl">{{item.title}}</text>
+          <text class="ref-meta">{{item.meta}}</text>
+        </view>
+      </view>
 
       <view class="msg-row msg-row-assist">
         <view class="avatar avatar-assist">AI</view>

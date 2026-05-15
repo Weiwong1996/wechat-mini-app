@@ -1,10 +1,11 @@
-const { getStoredSession } = require('./utils/auth')
+const { getStoredSession, getCurrentBabyId } = require('./utils/auth')
 const theme = require('./utils/theme')
 
 App({
   globalData: {
     session: null,
     user: null,
+    currentBabyId: null,
     tabBarInstance: null,
   },
 
@@ -15,6 +16,8 @@ App({
       this.globalData.session = session
       this.globalData.user = session.user || null
     }
+
+    this.globalData.currentBabyId = getCurrentBabyId()
 
     if (typeof wx.onThemeChange === 'function') {
       wx.onThemeChange(() => {

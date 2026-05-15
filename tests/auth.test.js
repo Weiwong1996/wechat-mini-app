@@ -3,6 +3,7 @@ const test = require('node:test')
 
 const {
   buildAuthHeaders,
+  buildUserAuthHeaders,
   loginWithWeChat,
   STORAGE_KEYS
 } = require('../utils/auth')
@@ -13,6 +14,14 @@ test('buildAuthHeaders includes Supabase anon key credentials', () => {
     'Content-Type': 'application/json',
     apikey: SUPABASE_ANON_KEY,
     Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+  })
+})
+
+test('buildUserAuthHeaders uses access token and anon apikey', () => {
+  assert.deepEqual(buildUserAuthHeaders('test-access-token'), {
+    'Content-Type': 'application/json',
+    apikey: SUPABASE_ANON_KEY,
+    Authorization: 'Bearer test-access-token'
   })
 })
 

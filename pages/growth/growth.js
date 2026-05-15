@@ -1,3 +1,23 @@
+const {
+  clearStoredSession,
+  getStoredSession,
+} = require('../../utils/auth')
+const { ensureCurrentBabyContext } = require('../../utils/babyContext')
+const { userGet } = require('../../utils/supabaseRest')
+
+function pad2(n) {
+  return n < 10 ? `0${n}` : `${n}`
+}
+
+function formatLogTime(iso) {
+  if (!iso) return ''
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  return `${d.getMonth() + 1} 月 ${d.getDate()} 日 ${pad2(d.getHours())}:${pad2(
+    d.getMinutes()
+  )}`
+}
+
 Page({
   behaviors: [require('../../behaviors/theme')],
 
@@ -5,42 +25,20 @@ Page({
     metricKind: 'weight',
     yAxisKg: ['9kg', '7kg', '5kg', '3kg', '1kg'],
     xAxis: ['出生', '1m', '2m', '3m', '4m', '5m', '6m'],
-    bento: [
-      {
-        key: 'w',
-        label: '当前体重',
-        main: '7.2',
-        unit: 'kg',
-        delta: '+0.4 kg 较上月',
-        up: true,
-      },
-      {
-        key: 'p',
-        label: '百分位',
-        main: '68th',
-        unit: '',
-        sub: '稳定增长轨迹',
-      },
-      {
-        key: 'g',
-        label: '月增重',
-        main: '480',
-        unit: 'g',
-        sub: '处于预期区间',
-      },
-    ],
-    insight:
-      "宝宝的生长轨迹令人安心：最近数月大致维持在约 68 百分位，发育平稳可预期。近期增重 480g 对该月龄来说非常合适。建议继续沿用目前的喂养节奏；代谢与营养利用良好（演示文案）。",
-    recentLogs: [
-      { icon: '⚖️', title: '月度体检', time: '今天 09:30', val: '7.2 kg' },
-      { icon: '📏', title: '身高测量', time: '9 月 10 日 14:15', val: '66.5 cm' },
-      { icon: '⚖️', title: '居家称重', time: '8 月 28 日 08:45', val: '6.8 kg' },
-    ],
+    bento: [],
+    insight: '在录入页添加带生长数据的记录后，将在此汇总展示（当前为说明占位）。',
+    recentLogs: [],
+    loading: true,
+    needBabySetup: false,
   },
+
+  _chartPts: null,
 
   onShow() {
     this.syncTheme()
-    setTimeout(() => this.drawGrowthChart(), 80)
+    this.loadGrowthData().then(() => {
+      setTimeout(() => this.drawGrowthChart(), 80)
+    })
   },
 
   onReady() {
@@ -48,16 +46,242 @@ Page({
     this.drawGrowthChart()
   },
 
+  async loadGrowthData() {
+    const session = getStoredSession()
+    if (!session) {
+      wx.redirectTo({ url: '/pages/login/login' })
+      return
+    }
+
+    this.setData({ loading: true, needBabySetup: false })
+
+    try {
+      const { babies, currentBabyId } = await ensureCurrentBabyContext(
+        wx,
+        session.accessToken
+      )
+      if (!babies.length || !currentBabyId) {
+        this.setData({
+          loading: false,
+          needBabySetup: true,
+          bento: [],
+          recentLogs: [],
+        })
+        this._chartPts = null
+        return
+      }
+
+      const raw = await userGet(
+        wx,
+        session.accessToken,
+        `growth_records?baby_id=eq.${currentBabyId}&select=id,height_cm,weight_kg,head_cm,recorded_at,milestone,note&order=recorded_at.asc&limit=200`
+      )
+      const records = Array.isArray(raw) ? raw : []
+
+      const series = this.buildSeriesForMetric(this.data.metricKind, records)
+      this._chartPts = series.pts
+      this.applyAxisLabels(series)
+
+      const latest = records.length ? records[records.length - 1] : null
+      const bento = this.buildBento(latest, records, this.data.metricKind)
+
+      const recentSlice = records.slice(-5).reverse()
+      const recentLogs = recentSlice.map((r) => {
+        const w = r.weight_kg != null ? `${r.weight_kg} kg` : ''
+        const h = r.height_cm != null ? `${r.height_cm} cm` : ''
+        const head = r.head_cm != null ? `${r.head_cm} cm` : ''
+        const val = w || h || head || r.milestone || '生长记录'
+        return {
+          icon: r.weight_kg != null ? '⚖️' : r.height_cm != null ? '📏' : '✨',
+          title: r.milestone || '生长记录',
+          time: formatLogTime(r.recorded_at),
+          val,
+        }
+      })
+
+      this.setData({
+        loading: false,
+        bento,
+        recentLogs,
+        insight:
+          records.length > 0
+            ? '以下为结构化生长记录汇总。完整问答与智能分析将在后续 Agent 阶段接入。'
+            : '在「记录」页书写内容并保存后，可将结构化生长数据写入 growth_records（下一迭代）；当前列表来自已存在的测量记录。',
+      })
+    } catch (err) {
+      if (err && err.statusCode === 401) {
+        clearStoredSession()
+        wx.reLaunch({ url: '/pages/login/login' })
+        return
+      }
+      this.setData({ loading: false })
+      wx.showToast({ title: err.message || '加载失败', icon: 'none' })
+    }
+  },
+
+  buildSeriesForMetric(kind, records) {
+    const pick = (r) => {
+      if (kind === 'weight' && r.weight_kg != null) return r.weight_kg
+      if (kind === 'height' && r.height_cm != null) return r.height_cm
+      if (kind === 'head' && r.head_cm != null) return r.head_cm
+      return null
+    }
+
+    const pts = []
+    for (const r of records) {
+      const v = pick(r)
+      if (v == null) continue
+      pts.push({ v: Number(v), t: r.recorded_at })
+    }
+
+    if (pts.length < 2) {
+      return {
+        pts: [
+          [0, 0.9],
+          [0.25, 0.74],
+          [0.5, 0.56],
+          [0.75, 0.45],
+          [1, 0.35],
+        ],
+        unit: kind === 'weight' ? 'kg' : 'cm',
+      }
+    }
+
+    const vals = pts.map((p) => p.v)
+    const min = Math.min(...vals)
+    const max = Math.max(...vals)
+    const span = Math.max(max - min, 0.01)
+    const pad = span * 0.15
+
+    const norm = []
+    for (let i = 0; i < pts.length; i++) {
+      const x = pts.length === 1 ? 1 : i / (pts.length - 1)
+      const yNorm = 1 - (pts[i].v - (min - pad)) / (span + 2 * pad)
+      const y = Math.min(0.95, Math.max(0.08, yNorm))
+      norm.push([x, y])
+    }
+
+    return { pts: norm, unit: kind === 'weight' ? 'kg' : 'cm' }
+  },
+
+  applyAxisLabels(series) {
+    const kind = this.data.metricKind
+    if (kind === 'weight') {
+      this.setData({
+        yAxisKg: ['上限', '', '', '', '下限'],
+        xAxis: ['起点', '', '', '', '', '', '最近'],
+      })
+      return
+    }
+    if (kind === 'height') {
+      this.setData({
+        yAxisKg: ['高', '', '', '', '低'],
+        xAxis: ['起点', '', '', '', '', '', '最近'],
+      })
+      return
+    }
+    this.setData({
+      yAxisKg: ['大', '', '', '', '小'],
+      xAxis: ['起点', '', '', '', '', '', '最近'],
+    })
+  },
+
+  buildBento(latest, records, metricKind) {
+    const out = []
+    if (!latest) {
+      out.push({
+        key: 'w',
+        label: '当前体重',
+        main: '—',
+        unit: 'kg',
+        sub: '暂无数据',
+      })
+      out.push({
+        key: 'p',
+        label: '百分位',
+        main: '—',
+        unit: '',
+        sub: '待补充测量',
+      })
+      out.push({
+        key: 'g',
+        label: '月增重',
+        main: '—',
+        unit: 'g',
+        sub: '待补充测量',
+      })
+      return out
+    }
+
+    if (metricKind === 'weight' && latest.weight_kg != null) {
+      out.push({
+        key: 'w',
+        label: '最近体重',
+        main: `${latest.weight_kg}`,
+        unit: 'kg',
+        delta: '',
+        sub: formatLogTime(latest.recorded_at),
+      })
+    } else if (metricKind === 'height' && latest.height_cm != null) {
+      out.push({
+        key: 'w',
+        label: '最近身长',
+        main: `${latest.height_cm}`,
+        unit: 'cm',
+        sub: formatLogTime(latest.recorded_at),
+      })
+    } else if (metricKind === 'head' && latest.head_cm != null) {
+      out.push({
+        key: 'w',
+        label: '最近头围',
+        main: `${latest.head_cm}`,
+        unit: 'cm',
+        sub: formatLogTime(latest.recorded_at),
+      })
+    } else {
+      out.push({
+        key: 'w',
+        label: '近期记录',
+        main: '—',
+        unit: '',
+        sub: '该指标暂无数值',
+      })
+    }
+
+    out.push({
+      key: 'p',
+      label: '样本数',
+      main: `${records.length}`,
+      unit: '条',
+      sub: 'growth_records',
+    })
+
+    const weights = records.filter((r) => r.weight_kg != null).map((r) => r.weight_kg)
+    let deltaText = ''
+    if (weights.length >= 2) {
+      const a = weights[weights.length - 2]
+      const b = weights[weights.length - 1]
+      const g = Math.round((b - a) * 1000)
+      deltaText = `${g >= 0 ? '+' : ''}${g} g`
+    }
+
+    out.push({
+      key: 'g',
+      label: '体重差分',
+      main: deltaText || '—',
+      unit: '',
+      sub: weights.length >= 2 ? '相邻两条' : '需至少两次体重',
+    })
+
+    return out.slice(0, 3)
+  },
+
   onPickMetric(e) {
     const k = e.currentTarget.dataset.k
     if (!k || k === this.data.metricKind) return
-    const yAxisKg =
-      k === 'weight'
-        ? ['9kg', '7kg', '5kg', '3kg', '1kg']
-        : k === 'height'
-          ? ['70cm', '65cm', '60cm', '55cm', '50cm']
-          : ['42cm', '40cm', '38cm', '36cm', '34cm']
-    this.setData({ metricKind: k, yAxisKg }, () => this.drawGrowthChart())
+    this.setData({ metricKind: k }, () => {
+      this.loadGrowthData().then(() => this.drawGrowthChart())
+    })
   },
 
   drawGrowthChart() {
@@ -85,7 +309,6 @@ Page({
         const h = cssH
         const bandW = Math.max(14, w * 0.034)
 
-        // WHO 区间带（粗描边模拟 HTML 中的宽描边路径）
         ctx.lineJoin = 'round'
         ctx.lineCap = 'round'
         ctx.strokeStyle = dark ? 'rgba(180, 178, 172, 0.35)' : '#ECEAE4'
@@ -95,7 +318,6 @@ Page({
         ctx.bezierCurveTo(w * 0.25, h * 0.62, w * 0.52, h * 0.42, w, h * 0.18)
         ctx.stroke()
 
-        // WHO 中位线（虚线）
         ctx.setLineDash([6, 4])
         ctx.strokeStyle = dark ? 'rgba(210, 208, 200, 0.55)' : 'rgba(95, 95, 93, 0.55)'
         ctx.lineWidth = 1.5
@@ -105,11 +327,7 @@ Page({
         ctx.stroke()
         ctx.setLineDash([])
 
-        // 宝宝生长折线
-        ctx.strokeStyle = dark ? '#f0eeeb' : '#1C1C1C'
-        ctx.lineWidth = 3
-        ctx.beginPath()
-        const pts = [
+        const pts = this._chartPts || [
           [0, 0.9],
           [0.1667, 0.74],
           [0.3333, 0.63],
@@ -118,13 +336,16 @@ Page({
           [0.8333, 0.42],
           [1, 0.35],
         ]
+
+        ctx.strokeStyle = dark ? '#f0eeeb' : '#1C1C1C'
+        ctx.lineWidth = 3
+        ctx.beginPath()
         ctx.moveTo(pts[0][0] * w, pts[0][1] * h)
         for (let i = 1; i < pts.length; i++) {
           ctx.lineTo(pts[i][0] * w, pts[i][1] * h)
         }
         ctx.stroke()
 
-        // 数据点
         ctx.fillStyle = dark ? '#f0eeeb' : '#1C1C1C'
         pts.forEach((p, i) => {
           const r = i === pts.length - 1 ? 6 : 4.5
@@ -144,14 +365,18 @@ Page({
   },
 
   onTapDownload() {
-    wx.showToast({ title: '演示：导出报告', icon: 'none' })
+    wx.showToast({ title: '导出功能开发中', icon: 'none' })
   },
 
   onTapClinic() {
-    wx.showToast({ title: '演示：联系诊所', icon: 'none' })
+    wx.showToast({ title: '联系诊所为演示占位', icon: 'none' })
   },
 
   onTapViewAllLogs() {
     wx.switchTab({ url: '/pages/record/record' })
+  },
+
+  onTapGoBabySetup() {
+    wx.navigateTo({ url: '/pages/baby-setup/baby-setup' })
   },
 })

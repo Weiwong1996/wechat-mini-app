@@ -303,3 +303,30 @@
 .send-btn-hover {
   opacity: 0.9;
 }
+
+/* 近期记录参考（Supabase 只读） */
+.ref-card {
+  margin: 16rpx 28rpx 0;
+  padding: 20rpx 22rpx 22rpx;
+  box-sizing: border-box;
+}
+
+.ref-line {
+  margin-top: 14rpx;
+  font-size: 26rpx;
+  line-height: 1.45;
+  display: flex;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.ref-ttl {
+  flex: 1;
+  min-width: 0;
+}
+
+.ref-meta {
+  flex-shrink: 0;
+  font-size: 22rpx;
+  opacity: 0.85;
+}

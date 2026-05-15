@@ -21,6 +21,11 @@
   max-width: 620rpx;
 }
 
+.growth-banner {
+  margin-bottom: 28rpx;
+  padding: 22rpx 24rpx;
+}
+
 /* Bento：纵向叠放（手机），与设计 parchment 卡片一致 */
 .bento-stack {
   display: flex;

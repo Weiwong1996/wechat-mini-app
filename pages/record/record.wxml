@@ -2,7 +2,11 @@
   <scroll-view class="record-scroll page-shell has-tab" scroll-y enhanced show-scrollbar="{{false}}">
     <view class="record-head">
       <view class="ds-screen-title record-main-title">成长记录</view>
-      <view class="record-subtitle ds-caption">搜索里程碑与每日记录（演示数据）</view>
+      <view class="record-subtitle ds-caption">同步至 Supabase · 按宝宝与日期筛选</view>
+    </view>
+
+    <view wx:if="{{needBabySetup}}" class="card record-banner" bindtap="onTapGoBabySetup">
+      <view class="ds-body">尚未创建宝宝档案，点此去新建。</view>
     </view>
 
     <view class="record-search card field-input">

@@ -19,6 +19,11 @@
   max-width: 620rpx;
 }
 
+.record-banner {
+  margin-bottom: 28rpx;
+  padding: 22rpx 24rpx;
+}
+
 .record-search {
   display: flex;
   flex-direction: row;

@@ -3,7 +3,7 @@
     <view class="profile-hero-card card">
       <view class="profile-avatar-wrap">
         <view class="profile-avatar-ring">
-          <view class="profile-avatar-inner muted-text">Leo</view>
+          <view class="profile-avatar-inner muted-text">{{avatarLetter}}</view>
         </view>
         <view class="profile-edit-fab" bindtap="onTapAvatar" hover-class="tile-active">✎</view>
       </view>
